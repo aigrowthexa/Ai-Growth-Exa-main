@@ -59,6 +59,16 @@ const sendResetOtpEmail = async (email, otp) =>
         })
     );
 
+const queueRegistrationOtpEmail = (email, otp) => {
+    setImmediate(async () => {
+        try {
+            await sendRegistrationOtpEmail(email, otp);
+        } catch (error) {
+            console.error(`Registration OTP email failed for ${email}:`, error?.message || error);
+        }
+    });
+};
+
 exports.createAdmin = async (req, res) => {
     const exists = await User.findOne({ role: "admin" });
     if (exists) return res.status(400).json({ message: "Admin exists" });
@@ -114,8 +124,11 @@ exports.register = async (req, res) => {
             );
         }
 
-        await sendRegistrationOtpEmail(normalizedEmail, otp);
-        res.json({ message: "OTP sent", email: normalizedEmail });
+        queueRegistrationOtpEmail(normalizedEmail, otp);
+        res.json({
+            message: "OTP is being sent. Please check your email and continue with verification.",
+            email: normalizedEmail,
+        });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

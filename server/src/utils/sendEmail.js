@@ -22,31 +22,44 @@ const sendEmail = async (to, subject, text, html = createEmailHtml(subject, text
     }
 
     const from = process.env.RESEND_FROM_EMAIL || "AI Growth Exa <onboarding@resend.dev>";
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
 
-    const response = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            from,
-            to: Array.isArray(to) ? to : [to],
-            subject,
-            text,
-            html,
-        }),
-    });
+    try {
+        const response = await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                from,
+                to: Array.isArray(to) ? to : [to],
+                subject,
+                text,
+                html,
+            }),
+            signal: controller.signal,
+        });
 
-    const data = await response.json().catch(() => ({}));
+        const data = await response.json().catch(() => ({}));
 
-    if (!response.ok) {
-        console.error("Resend email sending failed:", data);
-        throw new Error(data?.message || data?.error || "Email sending failed");
+        if (!response.ok) {
+            console.error("Resend email sending failed:", data);
+            throw new Error(data?.message || data?.error || "Email sending failed");
+        }
+
+        console.log(`Email sent to ${Array.isArray(to) ? to.join(", ") : to}`);
+        return data;
+    } catch (error) {
+        if (error?.name === "AbortError") {
+            throw new Error("Email sending timed out");
+        }
+
+        throw error;
+    } finally {
+        clearTimeout(timeout);
     }
-
-    console.log(`Email sent to ${Array.isArray(to) ? to.join(", ") : to}`);
-    return data;
 };
 
 module.exports = sendEmail;
