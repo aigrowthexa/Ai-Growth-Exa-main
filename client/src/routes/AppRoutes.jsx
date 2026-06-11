@@ -68,11 +68,12 @@ const AppRoutes = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/services/:slug" element={<Services />} />
-                    <Route path="/aisolution" element={<AiSolution />} />
+                    <Route path="/ai_solutions" element={<AiSolution />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/founder" element={<Founder />} />
                     <Route path="/awards" element={<Awards />} />
                     <Route path="/case-studies" element={<Casestudies />} />
+                    <Route path="/case-studies/:studyId" element={<Casestudies />} />
                     <Route path="/industries" element={<Industries />} />
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/careers" element={<Career />} />

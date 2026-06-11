@@ -91,18 +91,18 @@ const Awards = () => {
 
     // Partner logos data
     const partners = [
-        { name: "Deloitte", logo: "https://via.placeholder.com/150x80/fff/555?text=Deloitte", sector: "Consulting" },
-        { name: "McKinsey & Company", logo: "https://via.placeholder.com/150x80/fff/555?text=McKinsey", sector: "Strategy" },
-        { name: "EY", logo: "https://via.placeholder.com/150x80/fff/555?text=EY", sector: "Advisory" },
-        { name: "KPMG", logo: "https://via.placeholder.com/150x80/fff/555?text=KPMG", sector: "Consulting" },
-        { name: "Infosys", logo: "https://via.placeholder.com/150x80/fff/555?text=Infosys", sector: "Technology" },
-        { name: "Accenture", logo: "https://via.placeholder.com/150x80/fff/555?text=Accenture", sector: "Digital" },
-        { name: "IBM", logo: "https://via.placeholder.com/150x80/fff/555?text=IBM", sector: "Technology" },
-        { name: "PwC", logo: "https://via.placeholder.com/150x80/fff/555?text=PwC", sector: "Consulting" },
-        { name: "Cognizant", logo: "https://via.placeholder.com/150x80/fff/555?text=Cognizant", sector: "Digital" },
-        { name: "Bain & Company", logo: "https://via.placeholder.com/150x80/fff/555?text=Bain", sector: "Strategy" },
-        { name: "Capgemini", logo: "https://via.placeholder.com/150x80/fff/555?text=Capgemini", sector: "Technology" },
-        { name: "HCL Technologies", logo: "https://via.placeholder.com/150x80/fff/555?text=HCL", sector: "IT Services" }
+        { name: "Deloitte", mark: "D", sector: "Consulting" },
+        { name: "McKinsey & Company", mark: "M", sector: "Strategy" },
+        { name: "EY", mark: "EY", sector: "Advisory" },
+        { name: "KPMG", mark: "KPMG", sector: "Consulting" },
+        { name: "Infosys", mark: "I", sector: "Technology" },
+        { name: "Accenture", mark: "A", sector: "Digital" },
+        { name: "IBM", mark: "IBM", sector: "Technology" },
+        { name: "PwC", mark: "PwC", sector: "Consulting" },
+        { name: "Cognizant", mark: "C", sector: "Digital" },
+        { name: "Bain & Company", mark: "B", sector: "Strategy" },
+        { name: "Capgemini", mark: "C", sector: "Technology" },
+        { name: "HCL Technologies", mark: "HCL", sector: "IT Services" }
     ];
 
     // Results metrics
@@ -330,9 +330,9 @@ const Awards = () => {
                         </div>
                         <div className="relative">
                             <img
-                                src="https://via.placeholder.com/400x250/1877f2/ffffff?text=Meta+Certified+Partner"
+                                src={award2}
                                 alt="Meta Certified Company"
-                                className="rounded-xl shadow-lg w-full max-w-md mx-auto"
+                                className="rounded-xl shadow-lg w-full max-w-md mx-auto object-cover"
                             />
                         </div>
                     </div>
@@ -394,11 +394,9 @@ const Awards = () => {
                             key={index}
                             className="bg-gray-50 p-6 rounded-xl flex flex-col items-center justify-center h-32 hover:shadow-lg transition-all duration-300 animate-card opacity-0 translate-y-8 hover:-translate-y-2 group"
                         >
-                            <img
-                                src={partner.logo}
-                                alt={partner.name}
-                                className="max-h-12 mx-auto opacity-70 group-hover:opacity-100 transition-opacity"
-                            />
+                            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 text-lg font-black text-slate-700 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                                {partner.mark}
+                            </div>
                             <div className="text-center mt-2">
                                 <div className="text-xs font-semibold text-gray-700">{partner.name}</div>
                                 <div className="text-xs text-gray-500">{partner.sector}</div>
@@ -411,27 +409,76 @@ const Awards = () => {
     );
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-20">
-            <main className="max-w-7xl mx-auto px-4 py-8">
+        <div className="min-h-screen bg-gray-50 pt-16">
+            <main className="mx-auto max-w-7xl px-4 py-0">
                 {/* Hero Section */}
-                <section className="text-center mb-16 animate-fade-in">
-                    <div className="mb-10">
-                        <span className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
-                            Recognized Excellence
-                        </span>
-                        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                            Awards & Recognition
-                        </h1>
-                        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                            At <span className="text-blue-600 font-semibold">AI Growth Exa</span>, recognition validates our expertise, but results define our success.
-                        </p>
+                <section className="relative left-1/2 right-1/2 mb-8 w-screen -translate-x-1/2 overflow-hidden bg-[radial-gradient(circle_at_top_left,#0a1b55_0%,#050716_30%,#03030d_100%)] px-5 py-4 text-white shadow-2xl shadow-black/35 animate-fade-in md:px-8 md:py-5 lg:min-h-[calc(100vh-4.75rem)] lg:px-12">
+                    <div className="pointer-events-none absolute inset-0">
+                        <div className="absolute inset-0 bg-[linear-gradient(to_right,#5b7cff10_1px,transparent_1px),linear-gradient(to_bottom,#5b7cff0d_1px,transparent_1px)] bg-[size:40px_40px]" />
+                        <div className="absolute inset-y-0 left-0 w-[52%] bg-[linear-gradient(90deg,rgba(3,5,20,0.98)_0%,rgba(3,5,20,0.92)_72%,rgba(3,5,20,0)_100%)]" />
+                        <div className="absolute left-[6%] top-[10%] h-56 w-56 rounded-full bg-blue-500/18 blur-[110px]" />
+                        <div className="absolute right-[12%] top-[16%] h-72 w-72 rounded-full bg-fuchsia-500/16 blur-[130px]" />
+                        <div className="absolute right-[20%] bottom-[8%] h-64 w-64 rounded-full bg-blue-500/16 blur-[120px]" />
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,transparent_45%,rgba(2,4,15,0.32)_100%)]" />
                     </div>
 
-                    <div className="bg-gradient-to-r from-blue-50 to-gray-50 p-8 rounded-2xl max-w-4xl mx-auto border border-blue-100">
-                        <blockquote className="text-2xl md:text-3xl text-gray-800 leading-relaxed font-medium">
-                            "We don't just talk about growth.<br />
-                            <span className="font-bold text-blue-600">We're qualified, tested, and trusted to deliver it.</span>"
-                        </blockquote>
+                    <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-4 lg:grid-cols-[1.08fr_0.92fr] lg:gap-4">
+                        <div className="p-1 text-left md:p-2">
+                            <span className="mb-3 inline-flex items-center rounded-full border border-blue-300/30 bg-white/10 px-3 py-1.5 text-xs font-semibold text-blue-100">
+                                Platform Recognition
+                            </span>
+                            <h1 className="mb-3 max-w-xl text-3xl font-black leading-[0.98] md:text-4xl lg:text-[2.55rem]">
+                                Awards That Back Our
+                                <span className="block bg-gradient-to-r from-blue-200 via-cyan-200 to-white bg-clip-text text-transparent">
+                                    Meta, Google & SEO Strength
+                                </span>
+                            </h1>
+                            <p className="max-w-xl text-sm leading-6 text-blue-100/85 md:text-[15px] lg:text-sm">
+                                Recognition at AI Growth Exa is not just for display. It reflects our real execution strength,
+                                from Meta campaign systems to Google visibility growth and SEO-led brand authority.
+                            </p>
+
+                            <div className="mt-3.5 grid gap-2 sm:grid-cols-2">
+                                <div className="rounded-2xl border border-white/12 bg-[#091226]/65 p-2.5">
+                                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200/80">Meta Excellence</div>
+                                    <p className="mt-1.5 text-xs leading-5 text-blue-50/90 md:text-sm">
+                                        Performance campaigns, policy-safe scaling, and conversion-focused ad systems.
+                                    </p>
+                                </div>
+                                <div className="rounded-2xl border border-white/12 bg-[#091226]/65 p-2.5">
+                                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200/80">Google SEO Trust</div>
+                                    <p className="mt-1.5 text-xs leading-5 text-blue-50/90 md:text-sm">
+                                        Local search visibility, search authority, and stronger brand discovery systems.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium text-blue-50/90 md:text-sm">
+                                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1">Meta-certified campaign mindset</span>
+                                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1">Google-first SEO execution</span>
+                                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1">AI-powered growth systems</span>
+                            </div>
+                        </div>
+
+                        <div className="relative mx-auto flex w-full max-w-[430px] items-center justify-center lg:max-w-[470px]">
+                            <div className="relative w-full max-w-[430px]">
+                                <div className="ml-auto w-[76%] overflow-hidden rounded-[24px] border border-white/20 bg-white/10 p-2 shadow-[0_24px_80px_rgba(4,10,28,0.45)] backdrop-blur-sm">
+                                    <img
+                                        src={award2}
+                                        alt="Meta recognition visual"
+                                        className="h-[330px] w-full rounded-[18px] object-cover object-center lg:h-[400px]"
+                                    />
+                                </div>
+
+                                <div className="absolute -bottom-5 left-2 w-[46%] overflow-hidden rounded-[20px] border border-white/20 bg-[#0a1631]/90 p-1.5 shadow-[0_18px_50px_rgba(3,8,24,0.55)]">
+                                    <img
+                                        src={award1}
+                                        alt="Google SEO recognition visual"
+                                        className="h-[145px] w-full rounded-[14px] object-cover object-center lg:h-[175px]"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 

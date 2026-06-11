@@ -8,7 +8,7 @@ const CopyrightInfo = () => {
 
     return (
         <>
-            {/* MAIN CONTENT — pure headings and paragraphs, no boxes, no cards */}
+            {/* MAIN CONTENT  pure headings and paragraphs, no boxes, no cards */}
             <main className="bg-white">
                 <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
 
@@ -164,7 +164,7 @@ const CopyrightInfo = () => {
                         </p>
                     </section>
 
-                    {/* CONTACT INFORMATION — consolidated */}
+                    {/* CONTACT INFORMATION  consolidated */}
                     <section className="mb-12 border-t border-gray-100 pt-8">
                         <h2 className="text-lg font-semibold text-gray-900 mb-3">
                             Contact Information

@@ -460,7 +460,7 @@ const ServiceModal = memo(({ service, open, onClose, theme, onStartService }) =>
                             {[
                                 { icon: <AutoAwesomeIcon />, title: "1. Predict Customer Behavior", desc: "We use AI-driven analytics to understand how users think, browse, and buy." },
                                 { icon: <CampaignIcon />, title: "2. Intelligent Targeting & Messaging", desc: "LLM-powered systems personalize messaging across email, ads, landing pages, and chat." },
-                                { icon: <BoltIcon />, title: "3. Marketing Automation That Thinks", desc: "Automate decision-making using AI logic — campaigns adapt automatically based on performance." },
+                                { icon: <BoltIcon />, title: "3. Marketing Automation That Thinks", desc: "Automate decision-making using AI logic  campaigns adapt automatically based on performance." },
                                 { icon: <TrendingUpIcon />, title: "4. Funnel Optimization With AI", desc: "From awareness to conversion, optimize each stage of your funnel for maximum ROI." },
                             ].map((item, idx) => (
                                 <Grid size={{ xs: 12, md: 6 }} key={idx}>
@@ -786,11 +786,11 @@ const marquee2 = keyframes`
 const HowWeWorkSection = memo(({ theme }) => { return null; });
 
 // ══════════════════════════════════════════════════════════════════
-// ─── FIX 1: Industries Section — Grid fixed, boxes properly sized ─
+// ─── FIX 1: Industries Section  Grid fixed, boxes properly sized ─
 // ══════════════════════════════════════════════════════════════════
 const IndustriesSection = memo(({ theme }) => {
     const industries = [
-        { name: 'E-commerce & D2C', img: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80', desc: 'Shopify, WooCommerce, Amazon — scale your store.' },
+        { name: 'E-commerce & D2C', img: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80', desc: 'Shopify, WooCommerce, Amazon  scale your store.' },
         { name: 'SaaS & Tech', img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&q=80', desc: 'Product-led growth and B2B pipeline building.' },
         { name: 'Real Estate', img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80', desc: 'Lead generation and funnel automation for properties.' },
         { name: 'Healthcare', img: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=400&q=80', desc: 'Patient acquisition and reputation management.' },
@@ -946,7 +946,7 @@ const ToolsSection = memo(({ theme }) => {
                         }}>Best Tools in the Industry</Box>
                     </Typography>
                     <Typography variant="h6" sx={{ color: 'text.secondary', fontWeight: 400, maxWidth: 500, mx: 'auto' }}>
-                        24+ platforms, tools, and technologies — all orchestrated by our AI systems.
+                        24+ platforms, tools, and technologies  all orchestrated by our AI systems.
                     </Typography>
                 </Box>
             </Container>
@@ -991,12 +991,12 @@ const ToolsSection = memo(({ theme }) => {
 });
 
 // ══════════════════════════════════════════════════════════════════
-// ─── FIX 2: Final CTA Section — dark background removed ───────────
+// ─── FIX 2: Final CTA Section  dark background removed ───────────
 // ══════════════════════════════════════════════════════════════════
 const FinalCTASection = memo(({ theme, onStartService }) => (
     <Box sx={{
         position: 'relative', overflow: 'hidden',
-        // ✅ FIX: removed dark gradient background — now uses site background
+        // ✅ FIX: removed dark gradient background  now uses site background
         background: theme.palette.mode === 'dark'
             ? theme.palette.background.default
             : '#ffffff',
@@ -1007,7 +1007,7 @@ const FinalCTASection = memo(({ theme, onStartService }) => (
             alt="CTA"
             sx={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0 }}
         />
-        {/* Subtle gradient orbs — adjusted for light bg */}
+        {/* Subtle gradient orbs  adjusted for light bg */}
         <Box sx={{ position: 'absolute', top: -100, right: -100, width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(102,126,234,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <Box sx={{ position: 'absolute', bottom: -100, left: -100, width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(240,147,251,0.10) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
@@ -1057,12 +1057,12 @@ const FinalCTASection = memo(({ theme, onStartService }) => (
                     color: 'text.secondary',
                     mb: 6, fontWeight: 400, lineHeight: 1.7, maxWidth: 580, mx: 'auto',
                 }}>
-                    Let's turn your data into decisions — and decisions into revenue. Most clients see results within 30–60 days. No contracts. No fluff. Just growth.
+                    Let's turn your data into decisions  and decisions into revenue. Most clients see results within 30–60 days. No contracts. No fluff. Just growth.
                 </Typography>
 
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2.5} justifyContent="center">
                     <Button variant="contained" size="large" endIcon={<RocketLaunchIcon />}
-                        onClick={() => onStartService('AI Growth Era — All Services')}
+                        onClick={() => onStartService('AI Growth Era  All Services')}
                         sx={{
                             borderRadius: '50px', fontWeight: 800, px: 6, py: 2,
                             background: 'linear-gradient(135deg, #667eea, #764ba2)',
@@ -1401,363 +1401,363 @@ const ServicesContent = () => {
                     </Container>
                 </Box>
 
-                    {deferredReady ? (
-                        <>
-                            {/* Stats (hidden) */}
-                            <StatsSection theme={theme} />
+                {deferredReady ? (
+                    <>
+                        {/* Stats (hidden) */}
+                        <StatsSection theme={theme} />
 
-                {/* ── Philosophy Section ── */}
-                <Box sx={{ pt: { xs: 4, md: 4.5 }, pb: { xs: 1, md: 1.5 }, bgcolor: 'background.paper' }}>
-                    <Container maxWidth="xl">
-                        <Box sx={{ width: '100%', mx: 'auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: { xs: 1.25, md: 1.5 } }}>
-                            <Typography variant="h3" align="center" sx={{ mb: 0, fontWeight: 800, color: theme.palette.text.primary, lineHeight: 1.1 }}>
-                                Our Core Philosophy (Why Our Services Work)
-                            </Typography>
-                            <Typography variant="h5" align="center" sx={{ mb: 0, maxWidth: 800, mx: 'auto', fontStyle: 'italic', color: 'text.secondary', lineHeight: 1.35 }}>
-                                "Most agencies focus on activities. We focus on outcomes."
-                            </Typography>
-                            <Typography variant="h6" sx={{ fontWeight: 600, mb: 0 }}>Every service is:</Typography>
-                            <Box sx={{
-                                width: '100%', overflow: 'hidden', position: 'relative',
-                                '&::before, &::after': { content: '""', position: 'absolute', top: 0, width: '100px', height: '100%', zIndex: 2, pointerEvents: 'none' },
-                                '&::before': { left: 0, background: `linear-gradient(to right, ${theme.palette.background.paper}, transparent)` },
-                                '&::after': { right: 0, background: `linear-gradient(to left, ${theme.palette.background.paper}, transparent)` }
-                            }}>
-                                <Box sx={{ display: 'flex', width: 'max-content', animation: `${marquee} 20s linear infinite`, '&:hover': { animationPlayState: 'paused' } }}>
-                                    {[...Array(3)].map((_, i) => (
-                                        [{ title: 'AI-Driven', sticker: '🧠', desc: 'Strategies powered by data, not guesswork.' },
-                                        { title: 'ROI-Focused', sticker: '📈', desc: 'Every campaign differs, but the goal is profit.' },
-                                        { title: 'Designed to Scale', sticker: '🚀', desc: 'Systems built to grow with your business.' },
-                                        { title: 'Sales Integrated', sticker: '🤝', desc: 'Marketing that actually drives closed deals.' }
-                                        ].map((item, index) => (
-                                            <Box key={`${i}-${index}`} sx={{ width: { xs: 200, md: 220 }, mx: 1.5, flexShrink: 0, display: 'flex' }}>
-                                                <Paper elevation={0} sx={{
-                                                    p: 3, width: '100%', height: '100%', borderRadius: 3,
-                                                    bgcolor: alpha(theme.palette.background.paper, 0.6), backdropFilter: 'blur(20px)',
-                                                    border: '1px solid', borderColor: alpha(theme.palette.divider, 0.1),
-                                                    textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                                                    transition: 'all 0.3s ease',
-                                                    '&:hover': { transform: 'translateY(-8px)', borderColor: theme.palette.primary.main, boxShadow: `0 12px 30px -10px ${alpha(theme.palette.primary.main, 0.15)}` }
-                                                }}>
-                                                    <Box sx={{ mb: 2, p: 0.5, borderRadius: '50%', bgcolor: alpha(theme.palette.primary.main, 0.08), width: 68, height: 68, display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', boxShadow: `0 10px 24px ${alpha(theme.palette.primary.main, 0.16)}`, border: `1px solid ${alpha(theme.palette.primary.main, 0.14)}` }}>
-                                                        <motion.div animate={{ rotate: [0, 5, -5, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
-                                                            <Box
-                                                                component="img"
-                                                                src={{
-                                                                    'AI-Driven': 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=300&q=80',
-                                                                    'ROI-Focused': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=80',
-                                                                    'Designed to Scale': 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=300&q=80',
-                                                                    'Sales Integrated': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80',
-                                                                }[item.title]}
-                                                                alt={item.title}
-                                                                sx={{ width: 56, height: 56, borderRadius: '50%', objectFit: 'cover', display: 'block' }}
-                                                            />
-                                                        </motion.div>
+                        {/* ── Philosophy Section ── */}
+                        <Box sx={{ pt: { xs: 4, md: 4.5 }, pb: { xs: 1, md: 1.5 }, bgcolor: 'background.paper' }}>
+                            <Container maxWidth="xl">
+                                <Box sx={{ width: '100%', mx: 'auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: { xs: 1.25, md: 1.5 } }}>
+                                    <Typography variant="h3" align="center" sx={{ mb: 0, fontWeight: 800, color: theme.palette.text.primary, lineHeight: 1.1 }}>
+                                        Our Core Philosophy (Why Our Services Work)
+                                    </Typography>
+                                    <Typography variant="h5" align="center" sx={{ mb: 0, maxWidth: 800, mx: 'auto', fontStyle: 'italic', color: 'text.secondary', lineHeight: 1.35 }}>
+                                        "Most agencies focus on activities. We focus on outcomes."
+                                    </Typography>
+                                    <Typography variant="h6" sx={{ fontWeight: 600, mb: 0 }}>Every service is:</Typography>
+                                    <Box sx={{
+                                        width: '100%', overflow: 'hidden', position: 'relative',
+                                        '&::before, &::after': { content: '""', position: 'absolute', top: 0, width: '100px', height: '100%', zIndex: 2, pointerEvents: 'none' },
+                                        '&::before': { left: 0, background: `linear-gradient(to right, ${theme.palette.background.paper}, transparent)` },
+                                        '&::after': { right: 0, background: `linear-gradient(to left, ${theme.palette.background.paper}, transparent)` }
+                                    }}>
+                                        <Box sx={{ display: 'flex', width: 'max-content', animation: `${marquee} 20s linear infinite`, '&:hover': { animationPlayState: 'paused' } }}>
+                                            {[...Array(3)].map((_, i) => (
+                                                [{ title: 'AI-Driven', sticker: '🧠', desc: 'Strategies powered by data, not guesswork.' },
+                                                { title: 'ROI-Focused', sticker: '📈', desc: 'Every campaign differs, but the goal is profit.' },
+                                                { title: 'Designed to Scale', sticker: '🚀', desc: 'Systems built to grow with your business.' },
+                                                { title: 'Sales Integrated', sticker: '🤝', desc: 'Marketing that actually drives closed deals.' }
+                                                ].map((item, index) => (
+                                                    <Box key={`${i}-${index}`} sx={{ width: { xs: 200, md: 220 }, mx: 1.5, flexShrink: 0, display: 'flex' }}>
+                                                        <Paper elevation={0} sx={{
+                                                            p: 3, width: '100%', height: '100%', borderRadius: 3,
+                                                            bgcolor: alpha(theme.palette.background.paper, 0.6), backdropFilter: 'blur(20px)',
+                                                            border: '1px solid', borderColor: alpha(theme.palette.divider, 0.1),
+                                                            textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                                                            transition: 'all 0.3s ease',
+                                                            '&:hover': { transform: 'translateY(-8px)', borderColor: theme.palette.primary.main, boxShadow: `0 12px 30px -10px ${alpha(theme.palette.primary.main, 0.15)}` }
+                                                        }}>
+                                                            <Box sx={{ mb: 2, p: 0.5, borderRadius: '50%', bgcolor: alpha(theme.palette.primary.main, 0.08), width: 68, height: 68, display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', boxShadow: `0 10px 24px ${alpha(theme.palette.primary.main, 0.16)}`, border: `1px solid ${alpha(theme.palette.primary.main, 0.14)}` }}>
+                                                                <motion.div animate={{ rotate: [0, 5, -5, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
+                                                                    <Box
+                                                                        component="img"
+                                                                        src={{
+                                                                            'AI-Driven': 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=300&q=80',
+                                                                            'ROI-Focused': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=80',
+                                                                            'Designed to Scale': 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=300&q=80',
+                                                                            'Sales Integrated': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80',
+                                                                        }[item.title]}
+                                                                        alt={item.title}
+                                                                        sx={{ width: 56, height: 56, borderRadius: '50%', objectFit: 'cover', display: 'block' }}
+                                                                    />
+                                                                </motion.div>
+                                                            </Box>
+                                                            <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, lineHeight: 1.2 }}>{item.title}</Typography>
+                                                            <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.8rem', lineHeight: 1.4 }}>{item.desc}</Typography>
+                                                        </Paper>
                                                     </Box>
-                                                    <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, lineHeight: 1.2 }}>{item.title}</Typography>
-                                                    <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.8rem', lineHeight: 1.4 }}>{item.desc}</Typography>
-                                                </Paper>
-                                            </Box>
-                                        ))
-                                    ))}
-                                </Box>
-                            </Box>
-                            {/* <Typography variant="h5" sx={{ fontWeight: 700, color: theme.palette.primary.main, mt: 4 }}>
-                                That's why our services don't work in isolation — they work together.
+                                                ))
+                                            ))}
+                                        </Box>
+                                    </Box>
+                                    {/* <Typography variant="h5" sx={{ fontWeight: 700, color: theme.palette.primary.main, mt: 4 }}>
+                                That's why our services don't work in isolation  they work together.
                             </Typography> */}
+                                </Box>
+                            </Container>
                         </Box>
-                    </Container>
-                </Box>
 
-                {/* Why Choose Us (hidden) */}
-                <WhyChooseUsSection theme={theme} onStartService={handleStartService} />
+                        {/* Why Choose Us (hidden) */}
+                        <WhyChooseUsSection theme={theme} onStartService={handleStartService} />
 
-                {/* How It Works (hidden) */}
-                <HowItWorksSection theme={theme} />
+                        {/* How It Works (hidden) */}
+                        <HowItWorksSection theme={theme} />
 
-                {/* ── All Services Grid ── */}
-                <Box ref={ourServicesSectionRef} sx={{ pt: { xs: 1.5, md: 2 }, pb: { xs: 2, md: 2.5 }, bgcolor: alpha(theme.palette.background.default, 0.5) }}>
-                    <Container maxWidth="lg">
-                        <Box sx={{ textAlign: 'center', mb: { xs: 3, md: 3.5 } }}>
-                            <Typography variant="h2" align="center" sx={{ mb: 1, fontWeight: 800, color: theme.palette.text.primary, fontSize: { xs: '2rem', md: '3rem' }, lineHeight: 1.1 }}>
-                                Our All Services
-                            </Typography>
-                            <Typography variant="h6" align="center" sx={{ color: 'text.secondary', fontWeight: 400, maxWidth: 900, mx: 'auto', whiteSpace: 'nowrap', lineHeight: 1.35 }}>
-                                20+ AI-powered growth services designed to scale your business
-                            </Typography>
-                        </Box>
-                        {(() => {
-                            const tileServiceMap = {
-                                "AI Marketing Solutions": 1,
-                                "Performance Marketing": 2,
-                                "SEO & Growth Strategy": 3,
-                                "Podcast Marketing": 4,
-                                "Social Media Marketing": 11,
-                                "GMB with AI Model": 5,
-                                "Funnel & Automation": 6,
-                                "Branding & Creative": 7,
-                                "Logo Design": 7,
-                                "Website Development": 8,
-                                "Mobile Applications": 8,
-                                "Content Creation": 9,
-                                "Sales-Aligned Marketing": 10,
-                                "Email Marketing": 12,
-                                "E-commerce Marketing": 13,
-                                "WhatsApp Bulk Messaging": 14,
-                                "Brand Collaborations": 15,
-                                "Influencer Marketing": 16,
-                                "UX/UI Design": 8,
-                                "Application Marketing": 17,
-                                "Go-To-Market Strategies": 18,
-                            };
+                        {/* ── All Services Grid ── */}
+                        <Box ref={ourServicesSectionRef} sx={{ pt: { xs: 1.5, md: 2 }, pb: { xs: 2, md: 2.5 }, bgcolor: alpha(theme.palette.background.default, 0.5) }}>
+                            <Container maxWidth="lg">
+                                <Box sx={{ textAlign: 'center', mb: { xs: 3, md: 3.5 } }}>
+                                    <Typography variant="h2" align="center" sx={{ mb: 1, fontWeight: 800, color: theme.palette.text.primary, fontSize: { xs: '2rem', md: '3rem' }, lineHeight: 1.1 }}>
+                                        Our All Services
+                                    </Typography>
+                                    <Typography variant="h6" align="center" sx={{ color: 'text.secondary', fontWeight: 400, maxWidth: 900, mx: 'auto', whiteSpace: 'nowrap', lineHeight: 1.35 }}>
+                                        20+ AI-powered growth services designed to scale your business
+                                    </Typography>
+                                </Box>
+                                {(() => {
+                                    const tileServiceMap = {
+                                        "AI Marketing Solutions": 1,
+                                        "Performance Marketing": 2,
+                                        "SEO & Growth Strategy": 3,
+                                        "Podcast Marketing": 4,
+                                        "Social Media Marketing": 11,
+                                        "GMB with AI Model": 5,
+                                        "Funnel & Automation": 6,
+                                        "Branding & Creative": 7,
+                                        "Logo Design": 7,
+                                        "Website Development": 8,
+                                        "Mobile Applications": 8,
+                                        "Content Creation": 9,
+                                        "Sales-Aligned Marketing": 10,
+                                        "Email Marketing": 12,
+                                        "E-commerce Marketing": 13,
+                                        "WhatsApp Bulk Messaging": 14,
+                                        "Brand Collaborations": 15,
+                                        "Influencer Marketing": 16,
+                                        "UX/UI Design": 8,
+                                        "Application Marketing": 17,
+                                        "Go-To-Market Strategies": 18,
+                                    };
 
-                            const allServiceTiles = [
-                                { name: "AI Marketing Solutions", sub: "LLM Growth", icon: <PsychologyIcon />, img: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=500&q=80", color: '#667eea', desc: "Leverage Large Language Models to automate content, personalize outreach, and scale marketing efforts." },
-                                { name: "Performance Marketing", sub: "Google â€¢ Meta â€¢ LinkedIn", icon: <CampaignIcon />, img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80", color: '#4facfe', desc: "Data-driven advertising campaigns focused on measurable results and high conversion rates across platforms." },
-                                { name: "SEO & Growth Strategy", sub: "Organic Traffic", icon: <SearchIcon />, img: "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=500&q=80", color: '#43e97b', desc: "Dominate search results and drive sustainable organic growth with advanced SEO and keyword strategies." },
-                                { name: "Podcast Marketing", sub: "Audio Authority", icon: <PodcastsIcon />, img: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=500&q=80", color: '#f093fb', desc: "Build brand authority and reach engaged listeners through strategic podcast placements and sponsorships." },
-                                { name: "Social Media Marketing", sub: "Community Growth", icon: <PublicIcon />, img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=500&q=80", color: '#fa709a', desc: "Engage your audience and grow a loyal community across all major social media platforms." },
-                                { name: "GMB with AI Model", sub: "Local Growth", icon: <StoreIcon />, img: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=500&q=80", color: '#f7971e', desc: "Optimize your Google Business Profile with AI to dominate local search and attract more foot traffic." },
-                                { name: "Funnel & Automation", sub: "Convert at Scale", icon: <FilterFramesIcon />, img: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=500&q=80", color: '#fda085', desc: "Streamline your sales process with automated funnels that nurture leads into loyal customers." },
-                                { name: "Branding & Creative", sub: "Visual Identity", icon: <BrushIcon />, img: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=500&q=80", color: '#a18cd1', desc: "Create a memorable brand identity that resonates with your target audience and stands out." },
-                                { name: "Logo Design", sub: "Brand Mark", icon: <DrawIcon />, img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=500&q=80", color: '#fd79a8', desc: "Professional logo design that captures your brand's essence and leaves a lasting impression." },
-                                { name: "Website Development", sub: "Digital Presence", icon: <CodeIcon />, img: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=500&q=80", color: '#6c5ce7', desc: "High-performance, responsive websites built with modern technologies for the best user experience." },
-                                { name: "Mobile Applications", sub: "Android / iOS", icon: <SmartphoneIcon />, img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&q=80", color: '#00b894', desc: "Build powerful mobile apps that keep your customers engaged and drive business growth." },
-                                { name: "Content Creation", sub: "Words that Convert", icon: <CreateIcon />, img: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=500&q=80", color: '#00cec9', desc: "Engaging content that tells your story and drives action across all your digital channels." },
-                                { name: "Sales-Aligned Marketing", sub: "Revenue Systems", icon: <HandshakeIcon />, img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&q=80", color: '#0984e3', desc: "Align your marketing and sales teams to create a seamless revenue-generating machine." },
-                                { name: "Email Marketing", sub: "Inbox Revenue", icon: <EmailIcon />, img: "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=500&q=80", color: '#74b9ff', desc: "Nurture relationships and drive sales with personalized email campaigns that deliver results." },
-                                { name: "E-commerce Marketing", sub: "Online Store Growth", icon: <ShoppingCartIcon />, img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=500&q=80", color: '#fd79a8', desc: "Scale your online store with specialized e-commerce strategies that increase sales and loyalty." },
-                                { name: "WhatsApp Bulk Messaging", sub: "Direct Messaging", icon: <WhatsAppIcon />, img: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=500&q=80", color: '#55efc4', desc: "Reach your customers directly in their favorite messaging app with high-impact WhatsApp campaigns." },
-                                { name: "Brand Collaborations", sub: "Strategic Partnerships", icon: <GroupsIcon />, img: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=500&q=80", color: '#fdcb6e', desc: "Expand your reach through strategic partnerships and brand-to-brand collaborations." },
-                                { name: "Influencer Marketing", sub: "Trust & Reach", icon: <PeopleIcon />, img: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=500&q=80", color: '#e17055', desc: "Partner with trusted influencers to reach new audiences and build social proof for your brand." },
-                                { name: "UX/UI Design", sub: "User Experience", icon: <DesignServicesIcon />, img: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=500&q=80", color: '#a29bfe', desc: "Design beautiful, intuitive interfaces that provide exceptional user experiences across all devices." },
-                                { name: "Application Marketing", sub: "Installs & Retention", icon: <AppShortcutIcon />, img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&q=80", color: '#fd79a8', desc: "Drive app installs and increase user retention with targeted mobile app marketing strategies." },
-                                { name: "Go-To-Market Strategies", sub: "Launch Planning", icon: <FlagIcon />, img: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&q=80", color: '#e84393', desc: "Launch your products or services with confidence using a data-backed go-to-market plan." },
-                            ].map((tile) => ({
-                                ...tile,
-                                detailService: services.find((item) => item.id === tileServiceMap[tile.name]) || null,
-                            }));
-                            const visibleServiceTiles = showAllServices ? allServiceTiles : allServiceTiles.slice(0, 16);
-                            return (
-                                <>
-                                    <Grid container spacing={4} justifyContent="center">
-                                        {visibleServiceTiles.map((service, index) => (
-                                            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
-                                                <motion.div
-                                                    initial={{ opacity: 0, y: 30 }}
-                                                    whileInView={{ opacity: 1, y: 0 }}
-                                                    transition={{ duration: 0.4, delay: (index % 8) * 0.06 }}
-                                                    viewport={{ once: true }}
-                                                >
-                                                    <Box
-                                                        role="button"
-                                                        tabIndex={0}
-                                                        onClick={() => handleExploreDetails(service.detailService)}
-                                                        onKeyDown={(event) => {
-                                                            if (event.key === 'Enter' || event.key === ' ') {
-                                                                event.preventDefault();
-                                                                handleExploreDetails(service.detailService);
-                                                            }
-                                                        }}
-                                                        sx={{
-                                                        position: 'relative',
-                                                        borderRadius: 4, overflow: 'hidden', cursor: 'pointer',
-                                                        border: '1px solid', borderColor: alpha(theme.palette.divider, 0.08),
-                                                        background: 'transparent',
-                                                        height: '100%',
-                                                        display: 'flex',
-                                                        flexDirection: 'column',
-                                                        transition: 'transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease',
-                                                        outline: 'none',
-                                                        '&:hover': {
-                                                            transform: 'translateY(-6px)',
-                                                            borderColor: alpha(service.color, 0.45),
-                                                            boxShadow: `0 22px 50px -20px ${alpha(service.color, 0.45)}`,
-                                                            '& .svc-img': {
-                                                                filter: 'blur(8px)',
-                                                                transform: 'scale(1.06)',
-                                                            },
-                                                            '& .svc-base-overlay': {
-                                                                opacity: 0.18,
-                                                            },
-                                                            '& .svc-base-content': {
-                                                                opacity: 0,
-                                                                transform: 'translateY(16px)',
-                                                            },
-                                                            '& .svc-hover-overlay': {
-                                                                opacity: 1,
-                                                            },
-                                                            '& .svc-hover-content': {
-                                                                opacity: 1,
-                                                                transform: 'translateY(0)',
-                                                            },
-                                                        },
-                                                        '&:focus-visible': {
-                                                            transform: 'translateY(-6px)',
-                                                            borderColor: alpha(service.color, 0.6),
-                                                            boxShadow: `0 22px 50px -20px ${alpha(service.color, 0.45)}`,
-                                                        },
-                                                    }}>
-                                                        <Box sx={{ position: 'relative', height: { xs: 360, sm: 420, md: 460 }, overflow: 'hidden', flexShrink: 0 }}>
+                                    const allServiceTiles = [
+                                        { name: "AI Marketing Solutions", sub: "LLM Growth", icon: <PsychologyIcon />, img: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=500&q=80", color: '#667eea', desc: "Leverage Large Language Models to automate content, personalize outreach, and scale marketing efforts." },
+                                        { name: "Performance Marketing", sub: "Google â€¢ Meta â€¢ LinkedIn", icon: <CampaignIcon />, img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80", color: '#4facfe', desc: "Data-driven advertising campaigns focused on measurable results and high conversion rates across platforms." },
+                                        { name: "SEO & Growth Strategy", sub: "Organic Traffic", icon: <SearchIcon />, img: "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=500&q=80", color: '#43e97b', desc: "Dominate search results and drive sustainable organic growth with advanced SEO and keyword strategies." },
+                                        { name: "Podcast Marketing", sub: "Audio Authority", icon: <PodcastsIcon />, img: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=500&q=80", color: '#f093fb', desc: "Build brand authority and reach engaged listeners through strategic podcast placements and sponsorships." },
+                                        { name: "Social Media Marketing", sub: "Community Growth", icon: <PublicIcon />, img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=500&q=80", color: '#fa709a', desc: "Engage your audience and grow a loyal community across all major social media platforms." },
+                                        { name: "GMB with AI Model", sub: "Local Growth", icon: <StoreIcon />, img: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=500&q=80", color: '#f7971e', desc: "Optimize your Google Business Profile with AI to dominate local search and attract more foot traffic." },
+                                        { name: "Funnel & Automation", sub: "Convert at Scale", icon: <FilterFramesIcon />, img: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=500&q=80", color: '#fda085', desc: "Streamline your sales process with automated funnels that nurture leads into loyal customers." },
+                                        { name: "Branding & Creative", sub: "Visual Identity", icon: <BrushIcon />, img: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=500&q=80", color: '#a18cd1', desc: "Create a memorable brand identity that resonates with your target audience and stands out." },
+                                        { name: "Logo Design", sub: "Brand Mark", icon: <DrawIcon />, img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=500&q=80", color: '#fd79a8', desc: "Professional logo design that captures your brand's essence and leaves a lasting impression." },
+                                        { name: "Website Development", sub: "Digital Presence", icon: <CodeIcon />, img: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=500&q=80", color: '#6c5ce7', desc: "High-performance, responsive websites built with modern technologies for the best user experience." },
+                                        { name: "Mobile Applications", sub: "Android / iOS", icon: <SmartphoneIcon />, img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&q=80", color: '#00b894', desc: "Build powerful mobile apps that keep your customers engaged and drive business growth." },
+                                        { name: "Content Creation", sub: "Words that Convert", icon: <CreateIcon />, img: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=500&q=80", color: '#00cec9', desc: "Engaging content that tells your story and drives action across all your digital channels." },
+                                        { name: "Sales-Aligned Marketing", sub: "Revenue Systems", icon: <HandshakeIcon />, img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&q=80", color: '#0984e3', desc: "Align your marketing and sales teams to create a seamless revenue-generating machine." },
+                                        { name: "Email Marketing", sub: "Inbox Revenue", icon: <EmailIcon />, img: "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=500&q=80", color: '#74b9ff', desc: "Nurture relationships and drive sales with personalized email campaigns that deliver results." },
+                                        { name: "E-commerce Marketing", sub: "Online Store Growth", icon: <ShoppingCartIcon />, img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=500&q=80", color: '#fd79a8', desc: "Scale your online store with specialized e-commerce strategies that increase sales and loyalty." },
+                                        { name: "WhatsApp Bulk Messaging", sub: "Direct Messaging", icon: <WhatsAppIcon />, img: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=500&q=80", color: '#55efc4', desc: "Reach your customers directly in their favorite messaging app with high-impact WhatsApp campaigns." },
+                                        { name: "Brand Collaborations", sub: "Strategic Partnerships", icon: <GroupsIcon />, img: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=500&q=80", color: '#fdcb6e', desc: "Expand your reach through strategic partnerships and brand-to-brand collaborations." },
+                                        { name: "Influencer Marketing", sub: "Trust & Reach", icon: <PeopleIcon />, img: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=500&q=80", color: '#e17055', desc: "Partner with trusted influencers to reach new audiences and build social proof for your brand." },
+                                        { name: "UX/UI Design", sub: "User Experience", icon: <DesignServicesIcon />, img: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=500&q=80", color: '#a29bfe', desc: "Design beautiful, intuitive interfaces that provide exceptional user experiences across all devices." },
+                                        { name: "Application Marketing", sub: "Installs & Retention", icon: <AppShortcutIcon />, img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&q=80", color: '#fd79a8', desc: "Drive app installs and increase user retention with targeted mobile app marketing strategies." },
+                                        { name: "Go-To-Market Strategies", sub: "Launch Planning", icon: <FlagIcon />, img: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&q=80", color: '#e84393', desc: "Launch your products or services with confidence using a data-backed go-to-market plan." },
+                                    ].map((tile) => ({
+                                        ...tile,
+                                        detailService: services.find((item) => item.id === tileServiceMap[tile.name]) || null,
+                                    }));
+                                    const visibleServiceTiles = showAllServices ? allServiceTiles : allServiceTiles.slice(0, 16);
+                                    return (
+                                        <>
+                                            <Grid container spacing={4} justifyContent="center">
+                                                {visibleServiceTiles.map((service, index) => (
+                                                    <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
+                                                        <motion.div
+                                                            initial={{ opacity: 0, y: 30 }}
+                                                            whileInView={{ opacity: 1, y: 0 }}
+                                                            transition={{ duration: 0.4, delay: (index % 8) * 0.06 }}
+                                                            viewport={{ once: true }}
+                                                        >
                                                             <Box
-                                                                className="svc-img"
-                                                                component="img"
-                                                                src={service.img}
-                                                                alt={service.name}
+                                                                role="button"
+                                                                tabIndex={0}
+                                                                onClick={() => handleExploreDetails(service.detailService)}
+                                                                onKeyDown={(event) => {
+                                                                    if (event.key === 'Enter' || event.key === ' ') {
+                                                                        event.preventDefault();
+                                                                        handleExploreDetails(service.detailService);
+                                                                    }
+                                                                }}
                                                                 sx={{
-                                                                    width: '100%',
+                                                                    position: 'relative',
+                                                                    borderRadius: 4, overflow: 'hidden', cursor: 'pointer',
+                                                                    border: '1px solid', borderColor: alpha(theme.palette.divider, 0.08),
+                                                                    background: 'transparent',
                                                                     height: '100%',
-                                                                    objectFit: 'cover',
-                                                                    display: 'block',
-                                                                    transition: 'filter 0.45s ease, transform 0.45s ease',
-                                                                }}
-                                                            />
-                                                            <Box
-                                                                className="svc-base-overlay"
-                                                                sx={{
-                                                                    position: 'absolute',
-                                                                    inset: 0,
-                                                                    background: 'linear-gradient(180deg, rgba(21,10,44,0.18) 0%, rgba(15,10,34,0.58) 100%)',
-                                                                    zIndex: 1,
-                                                                    opacity: 1,
-                                                                    transition: 'opacity 0.35s ease',
-                                                                }}
-                                                            />
-                                                            <Box
-                                                                className="svc-base-content"
-                                                                sx={{
-                                                                    position: 'absolute',
-                                                                    inset: 0,
-                                                                    zIndex: 2,
                                                                     display: 'flex',
                                                                     flexDirection: 'column',
-                                                                    justifyContent: 'space-between',
-                                                                    p: 2.5,
-                                                                    color: '#fff',
-                                                                    transition: 'opacity 0.3s ease, transform 0.3s ease',
-                                                                }}
-                                                            >
-                                                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                                    <Box sx={{
-                                                                        px: 2, py: 0.75, borderRadius: '999px',
-                                                                        background: alpha('#ffffff', 0.18), color: '#fff',
-                                                                        fontWeight: 700, fontSize: '0.7rem', letterSpacing: 1,
-                                                                        textTransform: 'uppercase',
-                                                                        boxShadow: '0 14px 40px rgba(0,0,0,0.22)',
-                                                                    }}>
-                                                                        {service.name.split(' ')[0]}
-                                                                    </Box>
-                                                                </Box>
-                                                                <Box>
-                                                                    <Typography variant="subtitle2" sx={{ fontWeight: 800, lineHeight: 1.12, fontSize: { xs: '1.2rem', md: '1.35rem' }, maxWidth: '88%' }}>
-                                                                        {service.name}
-                                                                    </Typography>
-                                                                    <Typography variant="body2" sx={{ mt: 1, color: 'rgba(255,255,255,0.82)', fontSize: '0.92rem', fontWeight: 600 }}>
-                                                                        {service.sub}
-                                                                    </Typography>
-                                                                    <Typography
-                                                                        variant="body2"
+                                                                    transition: 'transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease',
+                                                                    outline: 'none',
+                                                                    '&:hover': {
+                                                                        transform: 'translateY(-6px)',
+                                                                        borderColor: alpha(service.color, 0.45),
+                                                                        boxShadow: `0 22px 50px -20px ${alpha(service.color, 0.45)}`,
+                                                                        '& .svc-img': {
+                                                                            filter: 'blur(8px)',
+                                                                            transform: 'scale(1.06)',
+                                                                        },
+                                                                        '& .svc-base-overlay': {
+                                                                            opacity: 0.18,
+                                                                        },
+                                                                        '& .svc-base-content': {
+                                                                            opacity: 0,
+                                                                            transform: 'translateY(16px)',
+                                                                        },
+                                                                        '& .svc-hover-overlay': {
+                                                                            opacity: 1,
+                                                                        },
+                                                                        '& .svc-hover-content': {
+                                                                            opacity: 1,
+                                                                            transform: 'translateY(0)',
+                                                                        },
+                                                                    },
+                                                                    '&:focus-visible': {
+                                                                        transform: 'translateY(-6px)',
+                                                                        borderColor: alpha(service.color, 0.6),
+                                                                        boxShadow: `0 22px 50px -20px ${alpha(service.color, 0.45)}`,
+                                                                    },
+                                                                }}>
+                                                                <Box sx={{ position: 'relative', height: { xs: 360, sm: 420, md: 460 }, overflow: 'hidden', flexShrink: 0 }}>
+                                                                    <Box
+                                                                        className="svc-img"
+                                                                        component="img"
+                                                                        src={service.img}
+                                                                        alt={service.name}
                                                                         sx={{
-                                                                            mt: 1.4,
-                                                                            color: 'rgba(255,255,255,0.92)',
-                                                                            fontSize: '0.92rem',
-                                                                            lineHeight: 1.55,
-                                                                            maxWidth: '92%',
+                                                                            width: '100%',
+                                                                            height: '100%',
+                                                                            objectFit: 'cover',
+                                                                            display: 'block',
+                                                                            transition: 'filter 0.45s ease, transform 0.45s ease',
+                                                                        }}
+                                                                    />
+                                                                    <Box
+                                                                        className="svc-base-overlay"
+                                                                        sx={{
+                                                                            position: 'absolute',
+                                                                            inset: 0,
+                                                                            background: 'linear-gradient(180deg, rgba(21,10,44,0.18) 0%, rgba(15,10,34,0.58) 100%)',
+                                                                            zIndex: 1,
+                                                                            opacity: 1,
+                                                                            transition: 'opacity 0.35s ease',
+                                                                        }}
+                                                                    />
+                                                                    <Box
+                                                                        className="svc-base-content"
+                                                                        sx={{
+                                                                            position: 'absolute',
+                                                                            inset: 0,
+                                                                            zIndex: 2,
+                                                                            display: 'flex',
+                                                                            flexDirection: 'column',
+                                                                            justifyContent: 'space-between',
+                                                                            p: 2.5,
+                                                                            color: '#fff',
+                                                                            transition: 'opacity 0.3s ease, transform 0.3s ease',
                                                                         }}
                                                                     >
-                                                                        {service.desc}
-                                                                    </Typography>
+                                                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                                            <Box sx={{
+                                                                                px: 2, py: 0.75, borderRadius: '999px',
+                                                                                background: alpha('#ffffff', 0.18), color: '#fff',
+                                                                                fontWeight: 700, fontSize: '0.7rem', letterSpacing: 1,
+                                                                                textTransform: 'uppercase',
+                                                                                boxShadow: '0 14px 40px rgba(0,0,0,0.22)',
+                                                                            }}>
+                                                                                {service.name.split(' ')[0]}
+                                                                            </Box>
+                                                                        </Box>
+                                                                        <Box>
+                                                                            <Typography variant="subtitle2" sx={{ fontWeight: 800, lineHeight: 1.12, fontSize: { xs: '1.2rem', md: '1.35rem' }, maxWidth: '88%' }}>
+                                                                                {service.name}
+                                                                            </Typography>
+                                                                            <Typography variant="body2" sx={{ mt: 1, color: 'rgba(255,255,255,0.82)', fontSize: '0.92rem', fontWeight: 600 }}>
+                                                                                {service.sub}
+                                                                            </Typography>
+                                                                            <Typography
+                                                                                variant="body2"
+                                                                                sx={{
+                                                                                    mt: 1.4,
+                                                                                    color: 'rgba(255,255,255,0.92)',
+                                                                                    fontSize: '0.92rem',
+                                                                                    lineHeight: 1.55,
+                                                                                    maxWidth: '92%',
+                                                                                }}
+                                                                            >
+                                                                                {service.desc}
+                                                                            </Typography>
+                                                                        </Box>
+                                                                    </Box>
+                                                                    <Box
+                                                                        className="svc-hover-overlay"
+                                                                        sx={{
+                                                                            position: 'absolute',
+                                                                            inset: 0,
+                                                                            background: `linear-gradient(180deg, ${alpha('#19062f', 0.9)} 0%, ${alpha(service.color, 0.78)} 100%)`,
+                                                                            zIndex: 3,
+                                                                            opacity: 0,
+                                                                            transition: 'opacity 0.35s ease',
+                                                                        }}
+                                                                    />
+                                                                    <Box
+                                                                        className="svc-hover-content"
+                                                                        sx={{
+                                                                            position: 'absolute',
+                                                                            inset: 0,
+                                                                            zIndex: 4,
+                                                                            p: 2.5,
+                                                                            color: '#fff',
+                                                                            display: 'flex',
+                                                                            flexDirection: 'column',
+                                                                            justifyContent: 'space-between',
+                                                                            opacity: 0,
+                                                                            transform: 'translateY(18px)',
+                                                                            transition: 'opacity 0.35s ease, transform 0.35s ease',
+                                                                        }}
+                                                                    >
+                                                                        <Box>
+                                                                            <Typography sx={{ fontWeight: 800, fontSize: '0.78rem', letterSpacing: 1, textTransform: 'uppercase', mb: 2.5 }}>
+                                                                                {service.sub}
+                                                                            </Typography>
+                                                                            <Typography sx={{ fontWeight: 800, fontSize: { xs: '1.55rem', md: '1.75rem' }, lineHeight: 1.08, mb: 1.6 }}>
+                                                                                {service.name}
+                                                                            </Typography>
+                                                                            <Typography sx={{ color: 'rgba(255,255,255,0.98)', fontSize: '0.92rem', lineHeight: 1.65, mb: 1.5 }}>
+                                                                                {service.desc}
+                                                                            </Typography>
+                                                                            <Typography sx={{ color: 'rgba(255,255,255,0.82)', fontSize: '0.85rem', lineHeight: 1.6, maxWidth: '95%' }}>
+                                                                                This service helps you get clearer positioning, better quality leads, and stronger business growth with a focused strategy.
+                                                                            </Typography>
+                                                                        </Box>
+                                                                        <Box
+                                                                            sx={{
+                                                                                display: 'flex',
+                                                                                alignItems: 'center',
+                                                                                gap: 1,
+                                                                                fontWeight: 800,
+                                                                                fontSize: '1.05rem',
+                                                                                color: '#fff',
+                                                                                background: 'transparent',
+                                                                                p: 0,
+                                                                                pointerEvents: 'none',
+                                                                            }}
+                                                                        >
+                                                                            <Typography component="span" sx={{ fontWeight: 800, fontSize: 'inherit' }}>
+                                                                                Expand
+                                                                            </Typography>
+                                                                            <ChevronRightOutlined sx={{ fontSize: 20 }} />
+                                                                        </Box>
+                                                                    </Box>
                                                                 </Box>
+                                                                <Box sx={{ height: 4, background: `linear-gradient(to right, ${service.color}, ${alpha(service.color, 0.3)})`, mt: 'auto' }} />
                                                             </Box>
-                                                            <Box
-                                                                className="svc-hover-overlay"
-                                                                sx={{
-                                                                    position: 'absolute',
-                                                                    inset: 0,
-                                                                    background: `linear-gradient(180deg, ${alpha('#19062f', 0.9)} 0%, ${alpha(service.color, 0.78)} 100%)`,
-                                                                    zIndex: 3,
-                                                                    opacity: 0,
-                                                                    transition: 'opacity 0.35s ease',
-                                                                }}
-                                                            />
-                                                            <Box
-                                                                className="svc-hover-content"
-                                                                sx={{
-                                                                    position: 'absolute',
-                                                                    inset: 0,
-                                                                    zIndex: 4,
-                                                                    p: 2.5,
-                                                                    color: '#fff',
-                                                                    display: 'flex',
-                                                                    flexDirection: 'column',
-                                                                    justifyContent: 'space-between',
-                                                                    opacity: 0,
-                                                                    transform: 'translateY(18px)',
-                                                                    transition: 'opacity 0.35s ease, transform 0.35s ease',
-                                                                }}
-                                                            >
-                                                                <Box>
-                                                                    <Typography sx={{ fontWeight: 800, fontSize: '0.78rem', letterSpacing: 1, textTransform: 'uppercase', mb: 2.5 }}>
-                                                                        {service.sub}
-                                                                    </Typography>
-                                                                    <Typography sx={{ fontWeight: 800, fontSize: { xs: '1.55rem', md: '1.75rem' }, lineHeight: 1.08, mb: 1.6 }}>
-                                                                        {service.name}
-                                                                    </Typography>
-                                                                    <Typography sx={{ color: 'rgba(255,255,255,0.98)', fontSize: '0.92rem', lineHeight: 1.65, mb: 1.5 }}>
-                                                                        {service.desc}
-                                                                    </Typography>
-                                                                    <Typography sx={{ color: 'rgba(255,255,255,0.82)', fontSize: '0.85rem', lineHeight: 1.6, maxWidth: '95%' }}>
-                                                                        This service helps you get clearer positioning, better quality leads, and stronger business growth with a focused strategy.
-                                                                    </Typography>
-                                                                </Box>
-                                                                <Box
-                                                                    sx={{
-                                                                        display: 'flex',
-                                                                        alignItems: 'center',
-                                                                        gap: 1,
-                                                                        fontWeight: 800,
-                                                                        fontSize: '1.05rem',
-                                                                        color: '#fff',
-                                                                        background: 'transparent',
-                                                                        p: 0,
-                                                                        pointerEvents: 'none',
-                                                                    }}
-                                                                >
-                                                                    <Typography component="span" sx={{ fontWeight: 800, fontSize: 'inherit' }}>
-                                                                        Expand
-                                                                    </Typography>
-                                                                    <ChevronRightOutlined sx={{ fontSize: 20 }} />
-                                                                </Box>
-                                                            </Box>
-                                                        </Box>
-                                                        <Box sx={{ height: 4, background: `linear-gradient(to right, ${service.color}, ${alpha(service.color, 0.3)})`, mt: 'auto' }} />
-                                                    </Box>
-                                                </motion.div>
+                                                        </motion.div>
+                                                    </Grid>
+                                                ))}
                                             </Grid>
-                                        ))}
-                                    </Grid>
 
-                                    {!showAllServices && (
-                                        <Box sx={{ textAlign: 'center', mt: 2.5 }}>
-                                            <Button variant="contained" size="large" onClick={() => setShowAllServices(true)} sx={{ borderRadius: '999px', px: 6, py: 1.8 }}>
-                                                View All Services
-                                            </Button>
-                                        </Box>
-                                    )}
-                                </>
-                            );
-                        })()}
-                    </Container>
-                </Box>
+                                            {!showAllServices && (
+                                                <Box sx={{ textAlign: 'center', mt: 2.5 }}>
+                                                    <Button variant="contained" size="large" onClick={() => setShowAllServices(true)} sx={{ borderRadius: '999px', px: 6, py: 1.8 }}>
+                                                        View All Services
+                                                    </Button>
+                                                </Box>
+                                            )}
+                                        </>
+                                    );
+                                })()}
+                            </Container>
+                        </Box>
 
-                {/* Featured Spotlight (hidden) */}
-                <FeaturedServicesSpotlight theme={theme} onStartService={handleStartService} />
+                        {/* Featured Spotlight (hidden) */}
+                        <FeaturedServicesSpotlight theme={theme} onStartService={handleStartService} />
 
-                {/* Testimonials (hidden) */}
-                <TestimonialsSection theme={theme} />
+                        {/* Testimonials (hidden) */}
+                        <TestimonialsSection theme={theme} />
 
-                {/* ── Service Detail Accordions ── */}
-                {/* <Box sx={{ py: 10, bgcolor: 'background.paper' }}>
+                        {/* ── Service Detail Accordions ── */}
+                        {/* <Box sx={{ py: 10, bgcolor: 'background.paper' }}>
                     <Container maxWidth="lg">
                         <Typography variant="h3" align="center" sx={{ mb: 8, fontWeight: 800, color: theme.palette.text.primary }}>
                             Explore Details
@@ -1775,330 +1775,330 @@ const ServicesContent = () => {
                     </Container>
                 </Box> */}
 
-                {/* ── Our Approach Process Section (New) ── */}
-                <Box sx={{ pt: { xs: 2.5, md: 3 }, pb: { xs: 1, md: 1.5 }, bgcolor: theme.palette.mode === 'dark' ? 'rgba(15,23,42,0.5)' : '#ffffff', position: 'relative', overflow: 'hidden' }}>
-                    <Container maxWidth="lg">
-                        <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 4.5 } }}>
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5 }}
-                                viewport={{ once: true }}
-                            >
-                                <Typography variant="overline" sx={{ color: 'black', fontWeight: 800, letterSpacing: 2.5, textTransform: 'uppercase' }}>
-                                    OUR APPROACH
-                                </Typography>
-                                <Typography variant="h3" sx={{ mt: 1.5, mb: 2, fontWeight: 900, color: theme.palette.text.primary, fontSize: { xs: '2rem', md: '3rem' } }}>
-                                    A Proven Process That Delivers Results
-                                </Typography>
-                                <Typography variant="h6" sx={{ color: 'text.secondary', fontWeight: 400, maxWidth: 650, mx: 'auto', fontSize: '1.1rem' }}>
-                                    We follow a data-driven process to deliver predictable growth<span style={{ color: theme.palette.black, fontWeight: 700 }}></span> for your brand.
-                                </Typography>
-                            </motion.div>
-                        </Box>
+                        {/* ── Our Approach Process Section (New) ── */}
+                        <Box sx={{ pt: { xs: 2.5, md: 3 }, pb: { xs: 1, md: 1.5 }, bgcolor: theme.palette.mode === 'dark' ? 'rgba(15,23,42,0.5)' : '#ffffff', position: 'relative', overflow: 'hidden' }}>
+                            <Container maxWidth="lg">
+                                <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 4.5 } }}>
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.5 }}
+                                        viewport={{ once: true }}
+                                    >
+                                        <Typography variant="overline" sx={{ color: 'black', fontWeight: 800, letterSpacing: 2.5, textTransform: 'uppercase' }}>
+                                            OUR APPROACH
+                                        </Typography>
+                                        <Typography variant="h3" sx={{ mt: 1.5, mb: 2, fontWeight: 900, color: theme.palette.text.primary, fontSize: { xs: '2rem', md: '3rem' } }}>
+                                            A Proven Process That Delivers Results
+                                        </Typography>
+                                        <Typography variant="h6" sx={{ color: 'text.secondary', fontWeight: 400, maxWidth: 650, mx: 'auto', fontSize: '1.1rem' }}>
+                                            We follow a data-driven process to deliver predictable growth<span style={{ color: theme.palette.black, fontWeight: 700 }}></span> for your brand.
+                                        </Typography>
+                                    </motion.div>
+                                </Box>
 
-                        <Grid container spacing={1} alignItems="center" justifyContent="center" sx={{ flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
-                            {[
-                                { title: "Discover", desc: "We understand your business, audience, and goals.", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=300&q=80", color: "#3b82f6" },
-                                { title: "Strategize", desc: "We create a custom AI-powered growth strategy.", img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=300&q=80", color: "#8b5cf6" },
-                                { title: "Execute", desc: "We implement, test, and optimize every campaign.", img: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&q=80", color: "#10b981" },
-                                { title: "Optimize", desc: "We analyze data and continually improve results.", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=80", color: "#f59e0b" },
-                                { title: "Scale", desc: "We scale what works and maximize your growth.", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80", color: "#ef4444" },
-                            ].map((step, index, arr) => (
-                                <React.Fragment key={index}>
-                                    <Grid size={{ xs: 12, sm: 6, md: 2.2 }}>
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 30 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.6, delay: index * 0.15 }}
-                                            viewport={{ once: true }}
-                                        >
-                                            <Box sx={{
-                                                textAlign: 'center', px: 1, py: 4, borderRadius: 6,
-                                                transition: 'all 0.3s ease',
-                                                '&:hover': { transform: 'translateY(-10px)' }
-                                            }}>
-                                                <Box sx={{
-                                                    width: 100, height: 100, mx: 'auto', mb: 3,
-                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                                    position: 'relative',
-                                                    // Dotted border container
-                                                    '&::after': {
-                                                        content: '""', position: 'absolute', inset: -8, borderRadius: '50%',
-                                                        border: `3px dotted ${step.color}`,
-                                                        animation: 'spin 10s linear infinite',
-                                                        opacity: 0.6
-                                                    }
-                                                }}>
-                                                    <Box
-                                                        component="img"
-                                                        src={step.img}
-                                                        alt={step.title}
-                                                        sx={{
-                                                            width: '100%', height: '100%',
-                                                            objectFit: 'cover', zIndex: 1,
-                                                            borderRadius: '50%',
-                                                            border: `2px solid ${alpha(step.color, 0.2)}`,
-                                                            boxShadow: `0 10px 25px ${alpha(step.color, 0.3)}`
-                                                        }}
-                                                    />
-                                                </Box>
-                                                <Typography variant="h5" sx={{ fontWeight: 800, mb: 1, color: theme.palette.text.primary, fontSize: '1.15rem' }}>
-                                                    {step.title}
-                                                </Typography>
-                                                <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.5, fontSize: '0.8rem', maxWidth: 160, mx: 'auto' }}>
-                                                    {step.desc}
-                                                </Typography>
-                                            </Box>
-                                        </motion.div>
-                                    </Grid>
-                                    {index < arr.length - 1 && (
-                                        <Grid size={{ md: 0.2 }} sx={{ display: { xs: 'none', md: 'block' }, textAlign: 'center' }}>
-                                            <motion.div
-                                                initial={{ opacity: 0, x: -10 }}
-                                                whileInView={{ opacity: 1, x: 0 }}
-                                                transition={{ duration: 0.5, delay: index * 0.15 + 0.3 }}
-                                                viewport={{ once: true }}
-                                            >
-                                                <ArrowForwardIcon sx={{ color: alpha(theme.palette.text.secondary, 0.2), fontSize: 22 }} />
-                                            </motion.div>
-                                        </Grid>
-                                    )}
-                                </React.Fragment>
-                            ))}
-                        </Grid>
-                    </Container>
-                    <style>
-                        {`
+                                <Grid container spacing={1} alignItems="center" justifyContent="center" sx={{ flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
+                                    {[
+                                        { title: "Discover", desc: "We understand your business, audience, and goals.", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=300&q=80", color: "#3b82f6" },
+                                        { title: "Strategize", desc: "We create a custom AI-powered growth strategy.", img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=300&q=80", color: "#8b5cf6" },
+                                        { title: "Execute", desc: "We implement, test, and optimize every campaign.", img: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&q=80", color: "#10b981" },
+                                        { title: "Optimize", desc: "We analyze data and continually improve results.", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=80", color: "#f59e0b" },
+                                        { title: "Scale", desc: "We scale what works and maximize your growth.", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=80", color: "#ef4444" },
+                                    ].map((step, index, arr) => (
+                                        <React.Fragment key={index}>
+                                            <Grid size={{ xs: 12, sm: 6, md: 2.2 }}>
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 30 }}
+                                                    whileInView={{ opacity: 1, y: 0 }}
+                                                    transition={{ duration: 0.6, delay: index * 0.15 }}
+                                                    viewport={{ once: true }}
+                                                >
+                                                    <Box sx={{
+                                                        textAlign: 'center', px: 1, py: 4, borderRadius: 6,
+                                                        transition: 'all 0.3s ease',
+                                                        '&:hover': { transform: 'translateY(-10px)' }
+                                                    }}>
+                                                        <Box sx={{
+                                                            width: 100, height: 100, mx: 'auto', mb: 3,
+                                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                            position: 'relative',
+                                                            // Dotted border container
+                                                            '&::after': {
+                                                                content: '""', position: 'absolute', inset: -8, borderRadius: '50%',
+                                                                border: `3px dotted ${step.color}`,
+                                                                animation: 'spin 10s linear infinite',
+                                                                opacity: 0.6
+                                                            }
+                                                        }}>
+                                                            <Box
+                                                                component="img"
+                                                                src={step.img}
+                                                                alt={step.title}
+                                                                sx={{
+                                                                    width: '100%', height: '100%',
+                                                                    objectFit: 'cover', zIndex: 1,
+                                                                    borderRadius: '50%',
+                                                                    border: `2px solid ${alpha(step.color, 0.2)}`,
+                                                                    boxShadow: `0 10px 25px ${alpha(step.color, 0.3)}`
+                                                                }}
+                                                            />
+                                                        </Box>
+                                                        <Typography variant="h5" sx={{ fontWeight: 800, mb: 1, color: theme.palette.text.primary, fontSize: '1.15rem' }}>
+                                                            {step.title}
+                                                        </Typography>
+                                                        <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.5, fontSize: '0.8rem', maxWidth: 160, mx: 'auto' }}>
+                                                            {step.desc}
+                                                        </Typography>
+                                                    </Box>
+                                                </motion.div>
+                                            </Grid>
+                                            {index < arr.length - 1 && (
+                                                <Grid size={{ md: 0.2 }} sx={{ display: { xs: 'none', md: 'block' }, textAlign: 'center' }}>
+                                                    <motion.div
+                                                        initial={{ opacity: 0, x: -10 }}
+                                                        whileInView={{ opacity: 1, x: 0 }}
+                                                        transition={{ duration: 0.5, delay: index * 0.15 + 0.3 }}
+                                                        viewport={{ once: true }}
+                                                    >
+                                                        <ArrowForwardIcon sx={{ color: alpha(theme.palette.text.secondary, 0.2), fontSize: 22 }} />
+                                                    </motion.div>
+                                                </Grid>
+                                            )}
+                                        </React.Fragment>
+                                    ))}
+                                </Grid>
+                            </Container>
+                            <style>
+                                {`
                             @keyframes spin {
                                 from { transform: rotate(0deg); }
                                 to { transform: rotate(360deg); }
                             }
                         `}
-                    </style>
-                </Box>
-
-                {/* ── Testimonials Section (New) ── */}
-                <Box sx={{ pt: { xs: 2, md: 2.5 }, pb: { xs: 2.5, md: 3 }, mt: { xs: -1, md: -1.5 }, bgcolor: theme.palette.mode === 'dark' ? 'rgba(15,23,42,0.8)' : '#f8fafc', position: 'relative' }}>
-                    <Container maxWidth="lg">
-                        <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 4.5 } }}>
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5 }}
-                                viewport={{ once: true }}
-                            >
-                                <Typography variant="overline" sx={{ color: 'black', fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase' }}>
-                                    CLIENT LOVE
-                                </Typography>
-                                <Typography variant="h3" sx={{ mt: 1.5, mb: 2, fontWeight: 900, color: theme.palette.text.primary, fontSize: { xs: '2rem', md: '2.8rem' } }}>
-                                    What Our Clients Say
-                                </Typography>
-                                <Typography variant="h6" sx={{ color: 'text.secondary', fontWeight: 400, maxWidth: 600, mx: 'auto', fontSize: '1.05rem' }}>
-                                    We're proud to be a growth partner for amazing brands.
-                                </Typography>
-                            </motion.div>
+                            </style>
                         </Box>
 
-                        <Box sx={{
-                            overflow: 'hidden', py: 2, mx: -2, position: 'relative',
-                            '&::before, &::after': {
-                                content: '""', position: 'absolute', top: 0, bottom: 0, width: 100, zIndex: 2,
-                                pointerEvents: 'none'
-                            },
-                            '&::before': { left: 0, background: `linear-gradient(to right, ${theme.palette.background.default}, transparent)` },
-                            '&::after': { right: 0, background: `linear-gradient(to left, ${theme.palette.background.default}, transparent)` }
-                        }}>
-                            <motion.div
-                                animate={{ x: [0, -1500] }}
-                                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                                style={{ display: 'flex', gap: '32px', width: 'max-content' }}
-                            >
-                                {[
-                                    { name: "Rohit Sharma", role: "CEO, Fitness Pro", text: "AI Growth Exa transformed our marketing completely. Leads up 200%!", img: "https://i.pravatar.cc/150?u=1" },
-                                    { name: "Ananya Verma", role: "Marketing Head", text: "Their AI strategies saved us time and increased ROI by 3X.", img: "https://i.pravatar.cc/150?u=2" },
-                                    { name: "Vikas Malhotra", role: "Founder, StyleCart", text: "Professional team and unmatched results. Highly recommended!", img: "https://i.pravatar.cc/150?u=3" },
-                                    { name: "Sanya Gupta", role: "Director, TechFlow", text: "The automation funnels are a game changer for our sales team.", img: "https://i.pravatar.cc/150?u=4" },
-                                    { name: "Arjun Mehta", role: "E-com Owner", text: "Scaled our ad spend with better efficiency than ever before.", img: "https://i.pravatar.cc/150?u=5" },
-                                    { name: "Priya Das", role: "Founder, Bloom", text: "Creative and strategic. They really understand our brand goals.", img: "https://i.pravatar.cc/150?u=6" },
-                                    // Duplicate for infinite effect
-                                    { name: "Rohit Sharma", role: "CEO, Fitness Pro", text: "AI Growth Exa transformed our marketing completely. Leads up 200%!", img: "https://i.pravatar.cc/150?u=1" },
-                                    { name: "Ananya Verma", role: "Marketing Head", text: "Their AI strategies saved us time and increased ROI by 3X.", img: "https://i.pravatar.cc/150?u=2" },
-                                    { name: "Vikas Malhotra", role: "Founder, StyleCart", text: "Professional team and unmatched results. Highly recommended!", img: "https://i.pravatar.cc/150?u=3" },
-                                ].map((testi, index) => (
-                                    <Paper key={index} elevation={0} sx={{
-                                        p: 3, borderRadius: 5, bgcolor: 'background.paper',
-                                        border: '1px solid', borderColor: alpha(theme.palette.divider, 0.1),
-                                        width: 320, flexShrink: 0,
-                                        display: 'flex', flexDirection: 'column',
-                                        transition: 'all 0.3s ease',
-                                        '&:hover': {
-                                            transform: 'translateY(-5px)',
-                                            borderColor: 'primary.main',
-                                            boxShadow: '0 15px 30px rgba(0,0,0,0.05)'
-                                        }
-                                    }}>
-                                        <FormatQuoteIcon sx={{ color: 'primary.main', fontSize: 30, mb: 1, opacity: 0.4 }} />
-                                        <Typography variant="body2" sx={{ color: 'text.primary', mb: 3, fontStyle: 'italic', lineHeight: 1.6, fontSize: '0.95rem' }}>
-                                            "{testi.text}"
-                                        </Typography>
-                                        <Box sx={{ mt: 'auto', display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                                            <Avatar src={testi.img} sx={{ width: 44, height: 44, border: '1.5px solid', borderColor: alpha(theme.palette.primary.main, 0.1) }} />
-                                            <Box>
-                                                <Typography variant="subtitle2" sx={{ fontWeight: 800, color: theme.palette.text.primary, lineHeight: 1.2 }}>
-                                                    {testi.name}
-                                                </Typography>
-                                                <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                                                    {testi.role}
-                                                </Typography>
-                                            </Box>
-                                        </Box>
-                                    </Paper>
-                                ))}
-                            </motion.div>
-                        </Box>
-
-                    </Container>
-                </Box>
-
-                            {/* How We Work (hidden) */}
-                            <HowWeWorkSection theme={theme} />
-
-                            {/* ── Industries Section (FIXED) ── */}
-                            <IndustriesSection theme={theme} />
-
-
-                            {/* ── Connect With the Founder ── */}
-                            <Box sx={{ py: 10, bgcolor: theme.palette.mode === 'dark' ? alpha('#fff', 0.02) : '#f8fafc' }}>
-                    <Container maxWidth="md">
-                        <Box sx={{ textAlign: 'center', mb: 6 }}>
-                            <Typography variant="h3" sx={{ fontWeight: 800, color: 'text.primary', mb: 2, letterSpacing: '-0.02em', fontSize: { xs: '2rem', md: '2.5rem' } }}>
-                                Connect With our expert team
-
-                            </Typography>
-                            <Typography variant="h6" sx={{ color: 'text.secondary', fontWeight: 400, maxWidth: 600, mx: 'auto', lineHeight: 1.6, fontSize: '1.1rem' }}>
-                                Want to Talk Growth, Strategy, or AI? Connect directly with the mind behind AI Growth Exa.
-                            </Typography>
-                        </Box>
-
-                        <Paper elevation={0} sx={{
-                            p: { xs: 4, md: 6 },
-                            borderRadius: '32px',
-                            border: '1px solid',
-                            borderColor: alpha(theme.palette.divider, 0.1),
-                            background: theme.palette.mode === 'dark' ? '#1e293b' : '#fff',
-                            display: 'flex',
-                            flexDirection: { xs: 'column', md: 'row' },
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: { xs: 4, md: 8 },
-                            boxShadow: '0 20px 40px rgba(0,0,0,0.05)'
-                        }}>
-                            {/* Buttons Side */}
-                            <Stack spacing={2.5} sx={{ width: { xs: '100%', md: '280px' } }}>
-                                <Button
-                                    onClick={() => handleStartService('Founder Connect')}
-                                    variant="contained"
-                                    size="large"
-                                    endIcon={<RocketLaunchIcon />}
-                                    sx={{
-                                        py: 1.8, px: 4, borderRadius: '100px',
-                                        background: 'linear-gradient(90deg, #6366f1 0%, #a855f7 100%)',
-                                        fontWeight: 800, fontSize: '1rem',
-                                        boxShadow: '0 10px 25px rgba(99, 102, 241, 0.4)',
-                                        '&:hover': { transform: 'scale(1.03)', background: 'linear-gradient(90deg, #4f46e5 0%, #9333ea 100%)' }
-                                    }}
-                                >
-                                    Start Growth Journey
-                                </Button>
-                                <Button
-                                    variant="outlined"
-                                    size="large"
-                                    onClick={handleScrollToServices}
-                                    sx={{
-                                        py: 1.8, px: 4, borderRadius: '100px',
-                                        borderColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(99, 102, 241, 0.5)',
-                                        color: theme.palette.mode === 'dark' ? '#fff' : '#1e1b4b',
-                                        fontWeight: 800, fontSize: '1rem',
-                                        border: '1.5px solid',
-                                        '&:hover': { borderColor: '#6366f1', background: alpha('#6366f1', 0.05) }
-                                    }}
-                                >
-                                    Our Services
-                                </Button>
-                            </Stack>
-
-                            {/* Vertical Divider */}
-                            <Divider orientation="vertical" flexItem sx={{ display: { xs: 'none', md: 'block' }, opacity: 0.5 }} />
-
-                            {/* QR Code Side */}
-                            <Box sx={{ textAlign: 'center' }}>
-                                <Box sx={{
-                                    p: 1.5, borderRadius: '20px', bgcolor: '#fff',
-                                    boxShadow: '0 15px 35px rgba(0,0,0,0.08)',
-                                    border: '1px solid #e2e8f0',
-                                    mb: 2, width: 220, height: 220, mx: 'auto',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center'
-                                }}>
-                                    <Box
-                                        component="img"
-                                        src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://wa.me/91XXXXXXXXXX"
-                                        alt="WhatsApp QR"
-                                        sx={{ width: '90%', height: '90%' }}
-                                    />
-                                </Box>
-                                <Button
-                                    startIcon={<WhatsAppIcon />}
-                                    sx={{
-                                        color: '#16a34a', fontWeight: 800, textTransform: 'none', fontSize: '1rem',
-                                        '&:hover': { bgcolor: 'transparent', textDecoration: 'underline' }
-                                    }}
-                                >
-                                    Connect on WhatsApp
-                                </Button>
-                            </Box>
-                        </Paper>
-                    </Container>
-                            </Box>
-                        </>
-                    ) : (
-                        <Box sx={{ pt: { xs: 3, md: 4 }, pb: { xs: 5, md: 6 }, bgcolor: 'background.paper' }}>
+                        {/* ── Testimonials Section (New) ── */}
+                        <Box sx={{ pt: { xs: 2, md: 2.5 }, pb: { xs: 2.5, md: 3 }, mt: { xs: -1, md: -1.5 }, bgcolor: theme.palette.mode === 'dark' ? 'rgba(15,23,42,0.8)' : '#f8fafc', position: 'relative' }}>
                             <Container maxWidth="lg">
-                                <Box sx={{ maxWidth: 620, mx: 'auto', textAlign: 'center', mb: 4 }}>
-                                    <Typography variant="h5" sx={{ fontWeight: 800, color: theme.palette.text.primary, mb: 1 }}>
-                                        Loading service experience...
-                                    </Typography>
-                                    <Typography variant="body1" sx={{ color: 'text.secondary', mb: 2.5 }}>
-                                        The page shell is ready. Detailed sections are being prepared in the background.
-                                    </Typography>
-                                    <LinearProgress sx={{ height: 8, borderRadius: 999, bgcolor: alpha(theme.palette.primary.main, 0.08) }} />
+                                <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 4.5 } }}>
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.5 }}
+                                        viewport={{ once: true }}
+                                    >
+                                        <Typography variant="overline" sx={{ color: 'black', fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase' }}>
+                                            CLIENT LOVE
+                                        </Typography>
+                                        <Typography variant="h3" sx={{ mt: 1.5, mb: 2, fontWeight: 900, color: theme.palette.text.primary, fontSize: { xs: '2rem', md: '2.8rem' } }}>
+                                            What Our Clients Say
+                                        </Typography>
+                                        <Typography variant="h6" sx={{ color: 'text.secondary', fontWeight: 400, maxWidth: 600, mx: 'auto', fontSize: '1.05rem' }}>
+                                            We're proud to be a growth partner for amazing brands.
+                                        </Typography>
+                                    </motion.div>
                                 </Box>
-                                <Grid container spacing={3}>
-                                    {[1, 2, 3, 4].map((item) => (
-                                        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={item}>
-                                            <Paper
-                                                elevation={0}
-                                                sx={{
-                                                    p: 3,
-                                                    minHeight: 220,
-                                                    borderRadius: 4,
-                                                    border: '1px solid',
-                                                    borderColor: alpha(theme.palette.divider, 0.12),
-                                                    background: alpha(theme.palette.background.paper, 0.9),
-                                                }}
-                                            >
-                                                <Box sx={{ width: 52, height: 52, borderRadius: 3, mb: 2, background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.16)}, ${alpha('#a855f7', 0.16)})` }} />
-                                                <Box sx={{ height: 18, width: '70%', borderRadius: 999, mb: 1.5, bgcolor: alpha(theme.palette.text.primary, 0.08) }} />
-                                                <Box sx={{ height: 12, width: '100%', borderRadius: 999, mb: 1, bgcolor: alpha(theme.palette.text.primary, 0.06) }} />
-                                                <Box sx={{ height: 12, width: '86%', borderRadius: 999, mb: 1, bgcolor: alpha(theme.palette.text.primary, 0.06) }} />
-                                                <Box sx={{ height: 12, width: '62%', borderRadius: 999, bgcolor: alpha(theme.palette.text.primary, 0.06) }} />
+
+                                <Box sx={{
+                                    overflow: 'hidden', py: 2, mx: -2, position: 'relative',
+                                    '&::before, &::after': {
+                                        content: '""', position: 'absolute', top: 0, bottom: 0, width: 100, zIndex: 2,
+                                        pointerEvents: 'none'
+                                    },
+                                    '&::before': { left: 0, background: `linear-gradient(to right, ${theme.palette.background.default}, transparent)` },
+                                    '&::after': { right: 0, background: `linear-gradient(to left, ${theme.palette.background.default}, transparent)` }
+                                }}>
+                                    <motion.div
+                                        animate={{ x: [0, -1500] }}
+                                        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                                        style={{ display: 'flex', gap: '32px', width: 'max-content' }}
+                                    >
+                                        {[
+                                            { name: "Rohit Sharma", role: "CEO, Fitness Pro", text: "AI Growth Exa transformed our marketing completely. Leads up 200%!", img: "https://i.pravatar.cc/150?u=1" },
+                                            { name: "Ananya Verma", role: "Marketing Head", text: "Their AI strategies saved us time and increased ROI by 3X.", img: "https://i.pravatar.cc/150?u=2" },
+                                            { name: "Vikas Malhotra", role: "Founder, StyleCart", text: "Professional team and unmatched results. Highly recommended!", img: "https://i.pravatar.cc/150?u=3" },
+                                            { name: "Sanya Gupta", role: "Director, TechFlow", text: "The automation funnels are a game changer for our sales team.", img: "https://i.pravatar.cc/150?u=4" },
+                                            { name: "Arjun Mehta", role: "E-com Owner", text: "Scaled our ad spend with better efficiency than ever before.", img: "https://i.pravatar.cc/150?u=5" },
+                                            { name: "Priya Das", role: "Founder, Bloom", text: "Creative and strategic. They really understand our brand goals.", img: "https://i.pravatar.cc/150?u=6" },
+                                            // Duplicate for infinite effect
+                                            { name: "Rohit Sharma", role: "CEO, Fitness Pro", text: "AI Growth Exa transformed our marketing completely. Leads up 200%!", img: "https://i.pravatar.cc/150?u=1" },
+                                            { name: "Ananya Verma", role: "Marketing Head", text: "Their AI strategies saved us time and increased ROI by 3X.", img: "https://i.pravatar.cc/150?u=2" },
+                                            { name: "Vikas Malhotra", role: "Founder, StyleCart", text: "Professional team and unmatched results. Highly recommended!", img: "https://i.pravatar.cc/150?u=3" },
+                                        ].map((testi, index) => (
+                                            <Paper key={index} elevation={0} sx={{
+                                                p: 3, borderRadius: 5, bgcolor: 'background.paper',
+                                                border: '1px solid', borderColor: alpha(theme.palette.divider, 0.1),
+                                                width: 320, flexShrink: 0,
+                                                display: 'flex', flexDirection: 'column',
+                                                transition: 'all 0.3s ease',
+                                                '&:hover': {
+                                                    transform: 'translateY(-5px)',
+                                                    borderColor: 'primary.main',
+                                                    boxShadow: '0 15px 30px rgba(0,0,0,0.05)'
+                                                }
+                                            }}>
+                                                <FormatQuoteIcon sx={{ color: 'primary.main', fontSize: 30, mb: 1, opacity: 0.4 }} />
+                                                <Typography variant="body2" sx={{ color: 'text.primary', mb: 3, fontStyle: 'italic', lineHeight: 1.6, fontSize: '0.95rem' }}>
+                                                    "{testi.text}"
+                                                </Typography>
+                                                <Box sx={{ mt: 'auto', display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                                                    <Avatar src={testi.img} sx={{ width: 44, height: 44, border: '1.5px solid', borderColor: alpha(theme.palette.primary.main, 0.1) }} />
+                                                    <Box>
+                                                        <Typography variant="subtitle2" sx={{ fontWeight: 800, color: theme.palette.text.primary, lineHeight: 1.2 }}>
+                                                            {testi.name}
+                                                        </Typography>
+                                                        <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                                                            {testi.role}
+                                                        </Typography>
+                                                    </Box>
+                                                </Box>
                                             </Paper>
-                                        </Grid>
-                                    ))}
-                                </Grid>
+                                        ))}
+                                    </motion.div>
+                                </Box>
+
                             </Container>
                         </Box>
-                    )}
+
+                        {/* How We Work (hidden) */}
+                        <HowWeWorkSection theme={theme} />
+
+                        {/* ── Industries Section (FIXED) ── */}
+                        <IndustriesSection theme={theme} />
+
+
+                        {/* ── Connect With the Founder ── */}
+                        <Box sx={{ py: 10, bgcolor: theme.palette.mode === 'dark' ? alpha('#fff', 0.02) : '#f8fafc' }}>
+                            <Container maxWidth="md">
+                                <Box sx={{ textAlign: 'center', mb: 6 }}>
+                                    <Typography variant="h3" sx={{ fontWeight: 800, color: 'text.primary', mb: 2, letterSpacing: '-0.02em', fontSize: { xs: '2rem', md: '2.5rem' } }}>
+                                        Connect With our expert team
+
+                                    </Typography>
+                                    <Typography variant="h6" sx={{ color: 'text.secondary', fontWeight: 400, maxWidth: 600, mx: 'auto', lineHeight: 1.6, fontSize: '1.1rem' }}>
+                                        Want to Talk Growth, Strategy, or AI? Connect directly with the mind behind AI Growth Exa.
+                                    </Typography>
+                                </Box>
+
+                                <Paper elevation={0} sx={{
+                                    p: { xs: 4, md: 6 },
+                                    borderRadius: '32px',
+                                    border: '1px solid',
+                                    borderColor: alpha(theme.palette.divider, 0.1),
+                                    background: theme.palette.mode === 'dark' ? '#1e293b' : '#fff',
+                                    display: 'flex',
+                                    flexDirection: { xs: 'column', md: 'row' },
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: { xs: 4, md: 8 },
+                                    boxShadow: '0 20px 40px rgba(0,0,0,0.05)'
+                                }}>
+                                    {/* Buttons Side */}
+                                    <Stack spacing={2.5} sx={{ width: { xs: '100%', md: '280px' } }}>
+                                        <Button
+                                            onClick={() => handleStartService('Founder Connect')}
+                                            variant="contained"
+                                            size="large"
+                                            endIcon={<RocketLaunchIcon />}
+                                            sx={{
+                                                py: 1.8, px: 4, borderRadius: '100px',
+                                                background: 'linear-gradient(90deg, #6366f1 0%, #a855f7 100%)',
+                                                fontWeight: 800, fontSize: '1rem',
+                                                boxShadow: '0 10px 25px rgba(99, 102, 241, 0.4)',
+                                                '&:hover': { transform: 'scale(1.03)', background: 'linear-gradient(90deg, #4f46e5 0%, #9333ea 100%)' }
+                                            }}
+                                        >
+                                            Start Growth Journey
+                                        </Button>
+                                        <Button
+                                            variant="outlined"
+                                            size="large"
+                                            onClick={handleScrollToServices}
+                                            sx={{
+                                                py: 1.8, px: 4, borderRadius: '100px',
+                                                borderColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(99, 102, 241, 0.5)',
+                                                color: theme.palette.mode === 'dark' ? '#fff' : '#1e1b4b',
+                                                fontWeight: 800, fontSize: '1rem',
+                                                border: '1.5px solid',
+                                                '&:hover': { borderColor: '#6366f1', background: alpha('#6366f1', 0.05) }
+                                            }}
+                                        >
+                                            Our Services
+                                        </Button>
+                                    </Stack>
+
+                                    {/* Vertical Divider */}
+                                    <Divider orientation="vertical" flexItem sx={{ display: { xs: 'none', md: 'block' }, opacity: 0.5 }} />
+
+                                    {/* QR Code Side */}
+                                    <Box sx={{ textAlign: 'center' }}>
+                                        <Box sx={{
+                                            p: 1.5, borderRadius: '20px', bgcolor: '#fff',
+                                            boxShadow: '0 15px 35px rgba(0,0,0,0.08)',
+                                            border: '1px solid #e2e8f0',
+                                            mb: 2, width: 220, height: 220, mx: 'auto',
+                                            display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                        }}>
+                                            <Box
+                                                component="img"
+                                                src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://wa.me/91XXXXXXXXXX"
+                                                alt="WhatsApp QR"
+                                                sx={{ width: '90%', height: '90%' }}
+                                            />
+                                        </Box>
+                                        <Button
+                                            startIcon={<WhatsAppIcon />}
+                                            sx={{
+                                                color: '#16a34a', fontWeight: 800, textTransform: 'none', fontSize: '1rem',
+                                                '&:hover': { bgcolor: 'transparent', textDecoration: 'underline' }
+                                            }}
+                                        >
+                                            Connect on WhatsApp
+                                        </Button>
+                                    </Box>
+                                </Paper>
+                            </Container>
+                        </Box>
+                    </>
+                ) : (
+                    <Box sx={{ pt: { xs: 3, md: 4 }, pb: { xs: 5, md: 6 }, bgcolor: 'background.paper' }}>
+                        <Container maxWidth="lg">
+                            <Box sx={{ maxWidth: 620, mx: 'auto', textAlign: 'center', mb: 4 }}>
+                                <Typography variant="h5" sx={{ fontWeight: 800, color: theme.palette.text.primary, mb: 1 }}>
+                                    Loading service experience...
+                                </Typography>
+                                <Typography variant="body1" sx={{ color: 'text.secondary', mb: 2.5 }}>
+                                    The page shell is ready. Detailed sections are being prepared in the background.
+                                </Typography>
+                                <LinearProgress sx={{ height: 8, borderRadius: 999, bgcolor: alpha(theme.palette.primary.main, 0.08) }} />
+                            </Box>
+                            <Grid container spacing={3}>
+                                {[1, 2, 3, 4].map((item) => (
+                                    <Grid size={{ xs: 12, sm: 6, md: 3 }} key={item}>
+                                        <Paper
+                                            elevation={0}
+                                            sx={{
+                                                p: 3,
+                                                minHeight: 220,
+                                                borderRadius: 4,
+                                                border: '1px solid',
+                                                borderColor: alpha(theme.palette.divider, 0.12),
+                                                background: alpha(theme.palette.background.paper, 0.9),
+                                            }}
+                                        >
+                                            <Box sx={{ width: 52, height: 52, borderRadius: 3, mb: 2, background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.16)}, ${alpha('#a855f7', 0.16)})` }} />
+                                            <Box sx={{ height: 18, width: '70%', borderRadius: 999, mb: 1.5, bgcolor: alpha(theme.palette.text.primary, 0.08) }} />
+                                            <Box sx={{ height: 12, width: '100%', borderRadius: 999, mb: 1, bgcolor: alpha(theme.palette.text.primary, 0.06) }} />
+                                            <Box sx={{ height: 12, width: '86%', borderRadius: 999, mb: 1, bgcolor: alpha(theme.palette.text.primary, 0.06) }} />
+                                            <Box sx={{ height: 12, width: '62%', borderRadius: 999, bgcolor: alpha(theme.palette.text.primary, 0.06) }} />
+                                        </Paper>
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Container>
+                    </Box>
+                )}
             </Box>
 
             {/* Modals */}

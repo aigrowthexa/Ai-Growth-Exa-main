@@ -130,11 +130,17 @@ const Navbar = () => {
                 { name: 'About Us', path: '/about' },
                 { name: 'About The Founder', path: '/founder' },
                 { name: 'Awards & Recognition', path: '/awards' },
+                { name: 'Industries We Serve', path: '/industries' },
+                { name: 'Case Studies', path: '/case-studies' },
             ],
         },
         {
             name: 'Services',
             path: '/services',
+            dropdown: [
+                { name: 'Services', path: '/services' },
+                { name: 'Ai Solutions', path: '/ai_solutions' },
+            ],
         },
         { name: 'Blog', path: '/blog' },
         { name: 'Careers', path: '/careers' },
@@ -146,7 +152,12 @@ const Navbar = () => {
         }
     };
 
-    const isAboutActive = location.pathname === '/about' || location.pathname === '/founder' || location.pathname === '/awards';
+    const isAboutActive =
+        location.pathname === '/about' ||
+        location.pathname === '/founder' ||
+        location.pathname === '/awards' ||
+        location.pathname === '/industries' ||
+        location.pathname.startsWith('/case-studies');
 
     return (
         <nav
@@ -178,9 +189,8 @@ const Navbar = () => {
                                             ref={index < 3 ? addToRefs : undefined}
                                             type="button"
                                             onClick={() => setOpenDropdown(isDropdownOpen ? null : link.name)}
-                                            className={`flex items-center gap-1 text-base font-medium transition-colors hover:text-blue-400 ${
-                                                isActive ? 'text-blue-400' : 'text-gray-300'
-                                            }`}
+                                            className={`flex items-center gap-1 text-base font-medium transition-colors hover:text-blue-400 ${isActive ? 'text-blue-400' : 'text-gray-300'
+                                                }`}
                                         >
                                             {link.name}
                                             <svg
@@ -206,17 +216,15 @@ const Navbar = () => {
 
                                     {link.dropdown && (
                                         <div
-                                            className={`absolute top-full left-0 mt-2 w-56 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl py-2 transition-all duration-200 ${
-                                                isDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
-                                            }`}
+                                            className={`absolute top-full left-0 mt-2 w-56 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl py-2 transition-all duration-200 ${isDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                                                }`}
                                         >
                                             {link.dropdown.map((subItem) => (
                                                 <Link
                                                     key={subItem.name}
                                                     to={subItem.path}
-                                                    className={`block px-4 py-2 text-sm transition-colors hover:bg-blue-600/10 hover:text-blue-400 ${
-                                                        location.pathname === subItem.path ? 'text-blue-400 bg-blue-600/5' : 'text-gray-300'
-                                                    }`}
+                                                    className={`block px-4 py-2 text-sm transition-colors hover:bg-blue-600/10 hover:text-blue-400 ${location.pathname === subItem.path ? 'text-blue-400 bg-blue-600/5' : 'text-gray-300'
+                                                        }`}
                                                 >
                                                     {subItem.name}
                                                 </Link>
@@ -245,11 +253,10 @@ const Navbar = () => {
                             value={navbarSearch}
                             onChange={(e) => setNavbarSearch(e.target.value)}
                             onFocus={() => navbarSearch.trim().length > 1 && setShowDropdown(true)}
-                            className={`block h-11 w-full rounded-full border border-gray-700 bg-gray-800 pr-4 pl-10 text-sm text-white placeholder-gray-400 transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 ${
-                                navbarSearch.trim().length > 0
-                                    ? 'opacity-100'
-                                    : 'opacity-0 group-hover:opacity-100 group-focus-within:opacity-100'
-                            }`}
+                            className={`block h-11 w-full rounded-full border border-gray-700 bg-gray-800 pr-4 pl-10 text-sm text-white placeholder-gray-400 transition-all duration-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 ${navbarSearch.trim().length > 0
+                                ? 'opacity-100'
+                                : 'opacity-0 group-hover:opacity-100 group-focus-within:opacity-100'
+                                }`}
                             placeholder="Search services..."
                         />
 
@@ -330,9 +337,8 @@ const Navbar = () => {
                                                             key={subItem.name}
                                                             to={subItem.path}
                                                             onClick={() => setIsMenuOpen(false)}
-                                                            className={`block px-8 py-2.5 text-sm transition-colors ${
-                                                                location.pathname === subItem.path ? 'text-blue-400' : 'text-gray-400 hover:text-white'
-                                                            }`}
+                                                            className={`block px-8 py-2.5 text-sm transition-colors ${location.pathname === subItem.path ? 'text-blue-400' : 'text-gray-400 hover:text-white'
+                                                                }`}
                                                         >
                                                             {subItem.name}
                                                         </Link>
@@ -346,10 +352,9 @@ const Navbar = () => {
                                             to={link.path}
                                             onClick={() => setIsMenuOpen(false)}
                                             className={({ isActive }) =>
-                                                `block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
-                                                    isActive
-                                                        ? 'bg-blue-600/10 text-blue-400'
-                                                        : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                                                `block px-4 py-3 rounded-lg text-base font-medium transition-colors ${isActive
+                                                    ? 'bg-blue-600/10 text-blue-400'
+                                                    : 'text-gray-300 hover:bg-gray-800 hover:text-white'
                                                 }`
                                             }
                                         >

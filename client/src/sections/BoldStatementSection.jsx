@@ -200,7 +200,7 @@ const BoldStatementSection = () => {
                   </div>
                   <div className="pt-1">
                     <h5 className="text-white font-bold text-sm mb-1">Strategize & Build</h5>
-                    <p className="text-gray-400 text-xs leading-relaxed">We craft a custom AI-powered growth roadmap — from ad automation to content pipelines — tailored to your goals.</p>
+                    <p className="text-gray-400 text-xs leading-relaxed">We craft a custom AI-powered growth roadmap  from ad automation to content pipelines  tailored to your goals.</p>
                   </div>
                 </div>
 
@@ -210,7 +210,7 @@ const BoldStatementSection = () => {
                   </div>
                   <div className="pt-1">
                     <h5 className="text-white font-bold text-sm mb-1">Launch & Scale</h5>
-                    <p className="text-gray-400 text-xs leading-relaxed">We execute, optimize, and scale your campaigns with real-time AI analytics — driving 10x growth on autopilot.</p>
+                    <p className="text-gray-400 text-xs leading-relaxed">We execute, optimize, and scale your campaigns with real-time AI analytics  driving 10x growth on autopilot.</p>
                   </div>
                 </div>
 

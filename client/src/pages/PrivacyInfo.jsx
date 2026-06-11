@@ -132,11 +132,11 @@ const PrivacyInfo = () => {
 
     return (
         <>
-            {/* MAIN CONTENT — only headings, paragraphs, lists. No cards, no containers, no divs. */}
+            {/* MAIN CONTENT  only headings, paragraphs, lists. No cards, no containers, no divs. */}
             <main className="bg-white pt-8">
                 <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
 
-                    {/* MAIN TITLE — plain heading */}
+                    {/* MAIN TITLE  plain heading */}
                     <h1 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-2">
                         Privacy Policy
                     </h1>
@@ -144,7 +144,7 @@ const PrivacyInfo = () => {
                         Last Updated: January 2026 · Effective under DPDP Act 2023
                     </p>
 
-                    {/* SUMMARY OF CHANGES — plain heading + paragraph */}
+                    {/* SUMMARY OF CHANGES  plain heading + paragraph */}
                     <section className="mb-12">
                         <h2 className="text-lg font-semibold text-gray-900 mb-3">
                             Summary of changes
@@ -158,7 +158,7 @@ const PrivacyInfo = () => {
                         </p>
                     </section>
 
-                    {/* SCOPE — plain section */}
+                    {/* SCOPE  plain section */}
                     <section className="mb-12">
                         <h2 className="text-lg font-semibold text-gray-900 mb-3">
                             Scope of the Privacy Policy
@@ -171,12 +171,12 @@ const PrivacyInfo = () => {
                         </p>
                         <p className="text-gray-700 text-sm bg-gray-50 p-4 -mx-4 sm:mx-0 sm:rounded-none border-l-4 border-gray-400">
                             <span className="font-semibold">Additional Info for EEA, Swiss and UK Data Subjects:</span> Legal bases we
-                            rely on where we use your information — Consent, Contract, Legal obligation, Legitimate interests.
+                            rely on where we use your information  Consent, Contract, Legal obligation, Legitimate interests.
                             You have the right to access, correct, and withdraw consent.
                         </p>
                     </section>
 
-                    {/* COLLECTION — three simple headings, no boxes */}
+                    {/* COLLECTION  three simple headings, no boxes */}
                     <section className="mb-12">
                         <h2 className="text-lg font-semibold text-gray-900 mb-5">
                             We collect information in a few different ways
@@ -208,8 +208,8 @@ const PrivacyInfo = () => {
                             your browser automatically sends whenever you visit a website, or that your mobile app automatically sends
                             when you’re using it. This log data includes, for example, your Internet Protocol (IP) address, activities
                             on social media sites, and other information collected from your device.
-                            Usage data and inferences: When you’re on our Services, we use your activity — such as which Pins you click on,
-                            terms you search for, boards you create, and any text that you add in a comment or description — along with
+                            Usage data and inferences: When you’re on our Services, we use your activity  such as which Pins you click on,
+                            terms you search for, boards you create, and any text that you add in a comment or description  along with
                             other information you’ve provided when you first signed up and information from our partners and advertisers
                             to make inferences about you and your preferences. Location Information: We use your IP address to infer your
                             approximate location, even if you don’t choose to share your precise location, and photos you share may include
@@ -255,7 +255,7 @@ const PrivacyInfo = () => {
                         </p>
                     </section>
 
-                    {/* ALL POLICY SECTIONS — pure headings and paragraphs, no cards */}
+                    {/* ALL POLICY SECTIONS  pure headings and paragraphs, no cards */}
                     <section className="mt-16 space-y-10">
                         {policySections.map((section, idx) => (
                             <article key={idx} className="border-t border-gray-100 pt-6 first:border-0 first:pt-0">

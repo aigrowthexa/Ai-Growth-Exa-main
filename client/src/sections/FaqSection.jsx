@@ -11,7 +11,7 @@ const faqData = [
     },
     {
         question: "How does AI actually help in marketing?",
-        answer: "AI allows us to predict user behavior, optimize targeting, reduce ad waste, improve conversions, and automate follow-ups — delivering higher ROI with smarter decisions."
+        answer: "AI allows us to predict user behavior, optimize targeting, reduce ad waste, improve conversions, and automate follow-ups  delivering higher ROI with smarter decisions."
     },
     {
         question: "Do you replace human marketers with AI?",
@@ -23,7 +23,7 @@ const faqData = [
     },
     {
         question: "What is your pricing model?",
-        answer: "We offer custom pricing based on your goals, scope, and budget. No rigid packages — only strategies that fit your business."
+        answer: "We offer custom pricing based on your goals, scope, and budget. No rigid packages  only strategies that fit your business."
     },
     {
         question: "How long before we see results?",
@@ -31,7 +31,7 @@ const faqData = [
     },
     {
         question: "Do you guarantee results?",
-        answer: "We don’t promise magic numbers. We build growth engines designed to perform consistently — the reason clients rank us among the top marketing agencies in Delhi NCR."
+        answer: "We don’t promise magic numbers. We build growth engines designed to perform consistently  the reason clients rank us among the top marketing agencies in Delhi NCR."
     },
     {
         question: "Can small businesses work with you?",
@@ -39,7 +39,7 @@ const faqData = [
     },
     {
         question: "Do you handle ads and automation together?",
-        answer: "Yes. Strategy, performance ads, funnels, and AI automation — all under one roof."
+        answer: "Yes. Strategy, performance ads, funnels, and AI automation  all under one roof."
     },
     {
         question: "Which platforms do you work on?",
@@ -63,7 +63,7 @@ const faqData = [
     },
     {
         question: "How do we get started?",
-        answer: "Simple — book a strategy call and let’s map your growth."
+        answer: "Simple  book a strategy call and let’s map your growth."
     },
     {
         question: "Do you build websites and applications?",

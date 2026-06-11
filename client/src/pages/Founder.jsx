@@ -110,7 +110,7 @@ const FounderIntroduction = () => {
         const y =
             chartPadding.top +
             ((maxMarketValue - entry.marketSize) / maxMarketValue) *
-                (chartHeight - chartPadding.top - chartPadding.bottom);
+            (chartHeight - chartPadding.top - chartPadding.bottom);
 
         return { ...entry, x, y };
     });
@@ -155,7 +155,7 @@ const FounderIntroduction = () => {
                                 "Behind every scalable brand is a growth mind that understands both numbers and people."
                             </p>
                             <p className="text-lg text-gray-700 mb-6">
-                                Priyanshu Srivastava is a growth-focused strategist and AI marketing architect who believes marketing should not just look good — it should perform, convert, and scale.
+                                Priyanshu Srivastava is a growth-focused strategist and AI marketing architect who believes marketing should not just look good  it should perform, convert, and scale.
                             </p>
                             <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-8">
                                 <p className="text-lg font-semibold text-gray-800 mb-2">
@@ -284,7 +284,7 @@ const FounderIntroduction = () => {
                                             const y =
                                                 chartPadding.top +
                                                 ((maxMarketValue - tick) / maxMarketValue) *
-                                                    (chartHeight - chartPadding.top - chartPadding.bottom);
+                                                (chartHeight - chartPadding.top - chartPadding.bottom);
 
                                             return (
                                                 <g key={tick}>

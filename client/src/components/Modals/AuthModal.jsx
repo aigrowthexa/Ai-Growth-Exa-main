@@ -4,10 +4,12 @@ import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { X, Mail, Lock, User, ArrowRight, Loader2, Github, CheckCircle } from 'lucide-react';
 import api from '../../api/api';
+import { useGoogleAuthConfig } from '../../context/GoogleAuthContext';
 
 const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { enabled: googleAuthEnabled, loading: googleAuthLoading } = useGoogleAuthConfig();
 
     // Determine view mode based on prop or URL path
     const [view, setView] = useState(initialView);
@@ -25,6 +27,8 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
     const [loginData, setLoginData] = useState({ email: '', password: '' });
     const [registerData, setRegisterData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
     const [otp, setOtp] = useState('');
+    const [forgotEmail, setForgotEmail] = useState('');
+    const [resetData, setResetData] = useState({ email: '', otp: '', newPassword: '', confirmPassword: '' });
     const [notification, setNotification] = useState(null);
 
     const showNotification = (message, type = 'success') => {
@@ -34,6 +38,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
 
     const handleLoginChange = (e) => setLoginData({ ...loginData, [e.target.name]: e.target.value });
     const handleRegisterChange = (e) => setRegisterData({ ...registerData, [e.target.name]: e.target.value });
+    const handleResetChange = (e) => setResetData({ ...resetData, [e.target.name]: e.target.value });
 
     const handleClose = () => {
         if (onClose) {
@@ -67,12 +72,6 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
             const msg = err.response?.data?.message || 'Login failed';
             setError(msg);
             showNotification(`Login Failed: ${msg}`, "error");
-
-            if (err.response?.status === 403 && msg === "Verify email first") {
-                // Pre-fill email for verification if possible, or just switch
-                // Ideally we should carry over the email to the verify step logic
-                setView('verify');
-            }
         } finally {
             setLoading(false);
         }
@@ -152,6 +151,114 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
         }
     };
 
+    const handleResendVerificationOtp = async () => {
+        const emailToVerify = registerData.email || loginData.email;
+
+        if (!emailToVerify) {
+            const msg = 'Email missing. Please register again.';
+            setError(msg);
+            showNotification(msg, 'error');
+            return;
+        }
+
+        try {
+            setLoading(true);
+            setError('');
+            await api.post('/auth/resend-verification-otp', { email: emailToVerify });
+            showNotification('Verification OTP resent. Check your email.', 'success');
+        } catch (err) {
+            const msg = err.response?.data?.message || 'Failed to resend verification OTP.';
+            setError(msg);
+            showNotification(`Resend Failed: ${msg}`, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleForgotPasswordStart = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
+        const emailToReset = forgotEmail || loginData.email;
+        if (!emailToReset) {
+            const msg = 'Please enter your email address first.';
+            setError(msg);
+            showNotification(msg, 'error');
+            setLoading(false);
+            return;
+        }
+
+        try {
+            await api.post('/auth/forgot-password', { email: emailToReset });
+            setResetData((prev) => ({ ...prev, email: emailToReset, otp: '', newPassword: '', confirmPassword: '' }));
+            showNotification('Reset OTP sent. Check your email.', 'success');
+            setView('forgot-verify');
+        } catch (err) {
+            const msg = err.response?.data?.message || 'Failed to send reset OTP.';
+            setError(msg);
+            showNotification(`Reset Failed: ${msg}`, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleVerifyResetOtpSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
+        try {
+            await api.post('/auth/verify-reset-otp', {
+                email: resetData.email,
+                otp: resetData.otp,
+            });
+
+            showNotification('OTP verified. Set your new password.', 'success');
+            setView('reset');
+        } catch (err) {
+            const msg = err.response?.data?.message || 'OTP verification failed.';
+            setError(msg);
+            showNotification(`Verification Failed: ${msg}`, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleResetPasswordSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
+        if (resetData.newPassword !== resetData.confirmPassword) {
+            const msg = 'Passwords do not match';
+            setError(msg);
+            showNotification(msg, 'error');
+            setLoading(false);
+            return;
+        }
+
+        try {
+            await api.post('/auth/reset-password', {
+                email: resetData.email,
+                otp: resetData.otp,
+                newPassword: resetData.newPassword,
+            });
+
+            showNotification('Password reset successful. Please sign in.', 'success');
+            setLoginData((prev) => ({ ...prev, email: resetData.email, password: '' }));
+            setResetData({ email: '', otp: '', newPassword: '', confirmPassword: '' });
+            setForgotEmail('');
+            setView('login');
+        } catch (err) {
+            const msg = err.response?.data?.message || 'Password reset failed.';
+            setError(msg);
+            showNotification(`Reset Failed: ${msg}`, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const handleGoogleSuccess = async (credentialResponse) => {
         try {
             setLoading(true);
@@ -171,7 +278,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
             }, 1000);
         } catch (err) {
             console.error('Google Login Error:', err);
-            const msg = 'Google Login failed. Please try again.';
+            const msg = err.response?.data?.message || err.response?.data?.error || 'Google Login failed. Please try again.';
             setError(msg);
             showNotification(msg, "error");
         } finally {
@@ -224,11 +331,17 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                 {view === 'login' && 'Welcome Back.'}
                                 {view === 'register' && 'Join the Revolution.'}
                                 {view === 'verify' && 'Verify Email.'}
+                                {view === 'forgot' && 'Reset Access.'}
+                                {view === 'forgot-verify' && 'Verify Reset OTP.'}
+                                {view === 'reset' && 'Create New Password.'}
                             </h2>
                             <p className="text-slate-400 text-sm leading-7 font-medium max-w-md">
                                 {view === 'login' && 'Access your dashboard, manage your projects, and track your growth metrics.'}
                                 {view === 'register' && 'Create your account to start your journey with AI-driven growth strategies.'}
                                 {view === 'verify' && 'Enter the OTP sent to your email to verify your account.'}
+                                {view === 'forgot' && 'Enter your email and we will send you an OTP to reset your password.'}
+                                {view === 'forgot-verify' && 'Enter the OTP sent to your email. After verification, the reset password page will open.'}
+                                {view === 'reset' && 'Choose a new password for your account after successful OTP verification.'}
                             </p>
                         </div>
 
@@ -256,12 +369,23 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                 {view === 'login' && 'Sign in'}
                                 {view === 'register' && 'Create Account'}
                                 {view === 'verify' && 'Verification'}
+                                {view === 'forgot' && 'Forgot Password'}
+                                {view === 'forgot-verify' && 'Verify OTP'}
+                                {view === 'reset' && 'Reset Password'}
                             </h3>
                             <p className="text-slate-500 text-sm">
                                 {view === 'login' && 'Enter your details to proceed'}
                                 {view === 'register' && 'Get started for free'}
                                 {view === 'verify' && 'Check your email for code'}
+                                {view === 'forgot' && 'We will send an OTP to your email'}
+                                {view === 'forgot-verify' && 'Check your email for the reset code'}
+                                {view === 'reset' && 'Enter your new password'}
                             </p>
+                            {view === 'verify' && registerData.email && (
+                                <p className="mt-2 text-xs font-medium text-slate-500">
+                                    OTP sent to <span className="text-slate-900">{registerData.email}</span>
+                                </p>
+                            )}
                         </div>
 
 
@@ -269,7 +393,10 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                         <form onSubmit={
                             view === 'login' ? handleLoginSubmit :
                                 view === 'register' ? handleRegisterSubmit :
-                                    handleVerifySubmit
+                                    view === 'verify' ? handleVerifySubmit :
+                                        view === 'forgot' ? handleForgotPasswordStart :
+                                            view === 'forgot-verify' ? handleVerifyResetOtpSubmit :
+                                                handleResetPasswordSubmit
                         } className="space-y-3">
 
                             {view === 'verify' && (
@@ -281,6 +408,24 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                             type="text"
                                             value={otp}
                                             onChange={(e) => setOtp(e.target.value)}
+                                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium text-slate-900 transition-all"
+                                            placeholder="123456"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
+                            {view === 'forgot-verify' && (
+                                <div className="space-y-1">
+                                    <label className="text-xs font-bold uppercase text-slate-500 ml-1">OTP Code</label>
+                                    <div className="relative">
+                                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                        <input
+                                            type="text"
+                                            name="otp"
+                                            value={resetData.otp}
+                                            onChange={handleResetChange}
                                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium text-slate-900 transition-all"
                                             placeholder="123456"
                                             required
@@ -307,7 +452,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                 </div>
                             )}
 
-                            {view !== 'verify' && (
+                            {view !== 'verify' && view !== 'forgot-verify' && view !== 'reset' && (
                                 <>
                                     <div className="space-y-1">
                                         <label className="text-xs font-bold uppercase text-slate-500 ml-1">Email Address</label>
@@ -316,8 +461,8 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                             <input
                                                 type="email"
                                                 name="email"
-                                                value={view === 'login' ? loginData.email : registerData.email}
-                                                onChange={view === 'login' ? handleLoginChange : handleRegisterChange}
+                                                value={view === 'login' ? loginData.email : view === 'register' ? registerData.email : forgotEmail}
+                                                onChange={view === 'login' ? handleLoginChange : view === 'register' ? handleRegisterChange : (e) => setForgotEmail(e.target.value)}
                                                 className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium text-slate-900 transition-all"
                                                 placeholder="name@company.com"
                                                 required
@@ -325,11 +470,22 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                         </div>
                                     </div>
 
-                                    <div className="space-y-1">
+                                    {(view === 'login' || view === 'register') && (
+                                        <div className="space-y-1">
                                         <div className="flex justify-between ml-1">
                                             <label className="text-xs font-bold uppercase text-slate-500">Password</label>
                                             {view === 'login' && (
-                                                <a href="#" className="text-xs text-blue-600 font-semibold hover:text-blue-700">Forgot?</a>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setForgotEmail(loginData.email);
+                                                        setError('');
+                                                        setView('forgot');
+                                                    }}
+                                                    className="text-xs text-blue-600 font-semibold hover:text-blue-700"
+                                                >
+                                                    Forgot?
+                                                </button>
                                             )}
                                         </div>
                                         <div className="relative">
@@ -339,6 +495,59 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                                 name="password"
                                                 value={view === 'login' ? loginData.password : registerData.password}
                                                 onChange={view === 'login' ? handleLoginChange : handleRegisterChange}
+                                                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium text-slate-900 transition-all"
+                                                placeholder="••••••••"
+                                                required
+                                            />
+                                        </div>
+                                        </div>
+                                    )}
+                                </>
+                            )}
+
+                            {view === 'reset' && (
+                                <>
+                                    <div className="space-y-1">
+                                        <label className="text-xs font-bold uppercase text-slate-500 ml-1">Email Address</label>
+                                        <div className="relative">
+                                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                value={resetData.email}
+                                                readOnly
+                                                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium text-slate-900 transition-all"
+                                                placeholder="name@company.com"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-1">
+                                        <label className="text-xs font-bold uppercase text-slate-500 ml-1">New Password</label>
+                                        <div className="relative">
+                                            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                            <input
+                                                type="password"
+                                                name="newPassword"
+                                                value={resetData.newPassword}
+                                                onChange={handleResetChange}
+                                                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium text-slate-900 transition-all"
+                                                placeholder="••••••••"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-1">
+                                        <label className="text-xs font-bold uppercase text-slate-500 ml-1">Confirm Password</label>
+                                        <div className="relative">
+                                            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                            <input
+                                                type="password"
+                                                name="confirmPassword"
+                                                value={resetData.confirmPassword}
+                                                onChange={handleResetChange}
                                                 className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium text-slate-900 transition-all"
                                                 placeholder="••••••••"
                                                 required
@@ -376,13 +585,27 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                         {view === 'login' && 'Sign In'}
                                         {view === 'register' && 'Create Account'}
                                         {view === 'verify' && 'Verify'}
+                                        {view === 'forgot' && 'Send OTP'}
+                                        {view === 'forgot-verify' && 'Verify OTP'}
+                                        {view === 'reset' && 'Reset Password'}
                                         <ArrowRight className="w-4 h-4" />
                                     </>
                                 )}
                             </button>
+
+                            {view === 'verify' && (
+                                <button
+                                    type="button"
+                                    onClick={handleResendVerificationOtp}
+                                    disabled={loading}
+                                    className="w-full py-2.5 border border-slate-200 text-slate-700 font-semibold rounded-xl transition-all duration-300 hover:bg-slate-50 disabled:opacity-60"
+                                >
+                                    Resend OTP
+                                </button>
+                            )}
                         </form>
 
-                        {view !== 'verify' && (
+                        {view !== 'verify' && view !== 'forgot' && view !== 'forgot-verify' && view !== 'reset' && (
                             <>
                                 <div className="relative my-3">
                                     <div className="absolute inset-0 flex items-center">
@@ -395,17 +618,24 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
 
                                 {/* Google Login Button */}
                                 <div className="mb-2 flex justify-center">
-                                    <GoogleLogin
-                                        onSuccess={handleGoogleSuccess}
-                                        onError={() => {
-
-                                            setError('Google Login Failed');
-                                        }}
-                                        useOneTap
-                                        containerProps={{
-                                            style: { width: '100%' }
-                                        }}
-                                    />
+                                    {googleAuthEnabled ? (
+                                        <GoogleLogin
+                                            onSuccess={handleGoogleSuccess}
+                                            onError={() => {
+                                                setError('Google Login Failed');
+                                            }}
+                                            useOneTap
+                                            containerProps={{
+                                                style: { width: '100%' }
+                                            }}
+                                        />
+                                    ) : (
+                                        <div className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-center text-sm font-medium text-slate-500">
+                                            {googleAuthLoading
+                                                ? 'Loading Google sign-in...'
+                                                : 'Google sign-in is not configured yet. Add the Google client ID to frontend or server config.'}
+                                        </div>
+                                    )}
                                 </div>
                             </>
                         )}
@@ -416,10 +646,15 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                     {view === 'login' && "Don't have an account?"}
                                     {view === 'register' && "Already have an account?"}
                                     {view === 'verify' && "Incorrect email?"}
+                                    {view === 'forgot' && "Remembered your password?"}
+                                    {view === 'forgot-verify' && "Want to sign in instead?"}
+                                    {view === 'reset' && "Want to sign in instead?"}
 
                                     <button
+                                        type="button"
                                         onClick={() => {
                                             if (view === 'verify') setView('register');
+                                            else if (view === 'forgot' || view === 'forgot-verify' || view === 'reset') setView('login');
                                             else setView(view === 'login' ? 'register' : 'login');
                                         }}
                                         className="ml-2 text-blue-600 font-bold hover:text-blue-700 hover:underline transition-colors"
@@ -427,6 +662,9 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                         {view === 'login' && 'Sign up free'}
                                         {view === 'register' && 'Sign in'}
                                         {view === 'verify' && 'Register again'}
+                                        {view === 'forgot' && 'Sign in'}
+                                        {view === 'forgot-verify' && 'Sign in'}
+                                        {view === 'reset' && 'Sign in'}
                                     </button>
                                 </p>
                             </div>

@@ -100,7 +100,7 @@ const AboutHeroSection = () => {
                                     <span className="font-bold text-gray-950">AI Growth Exa</span> is a growth marketing agency where <span className="text-blue-600 font-semibold">AI</span>, <span className="text-indigo-600 font-semibold">automation</span>, and performance marketing work together seamlessly.
                                 </p>
                                 <p className="text-gray-600 leading-relaxed mb-4">
-                                    We don't just run campaigns—we build complete growth systems that combine cutting-edge technology with proven strategies to deliver measurable results at scale.
+                                    We don't just run campaignswe build complete growth systems that combine cutting-edge technology with proven strategies to deliver measurable results at scale.
                                 </p>
                                 <p className="text-gray-600 leading-relaxed">
                                     From startups scaling from zero to Fortune 500 companies optimizing their marketing stack, we've delivered transformational growth across every industry.

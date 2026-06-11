@@ -82,7 +82,7 @@ const BrandStorySection = () => {
                                     At <span className="font-bold text-gray-900">AI Growth Exa</span>, we believe that a brand is more than just a logo or a color palette. It is the voice that speaks when you're not in the room, the feeling you leave behind, and the promise you keep to your customers.
                                 </p>
                                 <p>
-                                    In a digital landscape drowned in noise, we help you find your frequency. We blend <span className="text-blue-700 font-bold">data-driven strategy</span> with <span className="text-purple-700 font-bold">creative brilliance</span> to build identities that don't just fit in—they stand out and lead.
+                                    In a digital landscape drowned in noise, we help you find your frequency. We blend <span className="text-blue-700 font-bold">data-driven strategy</span> with <span className="text-purple-700 font-bold">creative brilliance</span> to build identities that don't just fit inthey stand out and lead.
                                 </p>
                             </div>
 

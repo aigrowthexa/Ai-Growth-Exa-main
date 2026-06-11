@@ -388,7 +388,7 @@ const StatsSection = () => {
                         {/* Tagline below stats */}
                         <div className="mt-8 pt-6 border-t border-gray-700/50">
                             <p className="text-lg md:text-xl text-gray-300 font-light">
-                                Because when <span className="font-bold text-white">AI meets strategy</span> — <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">results follow.</span>
+                                Because when <span className="font-bold text-white">AI meets strategy</span>  <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">results follow.</span>
                             </p>
                         </div>
 

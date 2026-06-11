@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link, useLocation } from 'react-router-dom';
@@ -20,7 +20,8 @@ import {
   Smartphone,
   Cpu,
   MessageSquare,
-  Search
+  Search,
+  ChevronDown
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -29,7 +30,7 @@ const About = () => {
   const location = useLocation();
   const heroRef = useRef(null);
   const statsRef = useRef(null);
-  const [showAllFaqs, setShowAllFaqs] = React.useState(false);
+  const [openFaqs, setOpenFaqs] = useState({});
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -61,16 +62,25 @@ const About = () => {
   }, []);
 
   const faqs = [
-    { q: 'When was AI Growth Exa founded?', a: 'We were founded in 2019 with a focus on AI-driven growth marketing.' },
-    { q: 'Are you a traditional marketing agency?', a: 'No. We are a growth-focused, AI-first agency.' },
-    { q: 'Do you work with international clients?', a: 'Yes. We work globally with a remote-first mindset.' },
-    { q: 'What size companies do you work with?', a: 'From growth-stage startups to enterprise-level brands.' },
-    { q: 'What makes your approach different?', a: 'We build systems, not just campaigns.' },
-    { q: 'Is AI replacing human marketers?', a: 'No. AI supports smarter human decisions.' },
-    { q: 'Do you provide reporting and insights?', a: 'Yes. Full transparency with actionable insights.' },
+    { q: 'When was AI Growth Exa founded?', a: 'We were founded in 2019 with a clear focus on AI-driven growth marketing, performance systems, and long-term brand scaling.' },
+    { q: 'Are you a traditional marketing agency?', a: 'No. We are a growth-focused, AI-first agency that combines strategy, automation, creative execution, and performance marketing.' },
+    { q: 'Do you work with international clients?', a: 'Yes. We work with clients across different markets and operate with a remote-first, systems-led delivery model.' },
+    { q: 'What size companies do you work with?', a: 'We partner with growth-stage startups, scaling brands, and enterprise-level businesses that need smarter marketing systems.' },
+    { q: 'What makes your approach different?', a: 'We do not just launch campaigns. We build measurable growth systems backed by data, automation, and clear decision-making.' },
+    { q: 'Is AI replacing human marketers?', a: 'No. AI helps our team move faster and make sharper decisions, but human strategy, creativity, and judgment remain essential.' },
+    { q: 'Do you provide reporting and insights?', a: 'Yes. We provide transparent reporting with actionable insights, performance breakdowns, and recommendations for the next growth steps.' },
+    { q: 'What services can you support under one roof?', a: 'We support branding, SEO, paid ads, funnels, automation, content systems, website strategy, and performance optimization.' },
+    { q: 'How do you start working with a new client?', a: 'We begin with research, business understanding, goal alignment, and a practical roadmap so execution starts with clarity.' },
+    { q: 'Do you only focus on leads and ads?', a: 'No. We look at the full growth picture including positioning, conversion, retention, visibility, and scalable systems.' },
   ];
 
-  const visibleFaqs = showAllFaqs ? faqs : faqs.slice(0, 4);
+  const visibleFaqs = faqs;
+  const toggleFaq = (index) => {
+    setOpenFaqs((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
 
   return (
     <div className="bg-white">
@@ -113,25 +123,25 @@ const About = () => {
 
           <p className="hero-text mx-auto mb-0 max-w-4xl text-base font-medium leading-relaxed text-slate-300 md:text-lg">
             At <span className="text-white font-bold">AI Growth Exa</span>, we don’t just market brands. We build intelligent growth systems designed for an AI-first world.<br /><br />
-            Founded in 2019, AI Growth Exa was created with one clear belief: Marketing should be intelligent, measurable, and scalable — not guesswork.
+            Founded in 2019, AI Growth Exa was created with one clear belief: Marketing should be intelligent, measurable, and scalable  not guesswork.
           </p>
         </div>
       </section>
 
       {/* Success Story Section */}
-      <section className="relative py-20 bg-white overflow-hidden">
+      <section className="relative overflow-hidden bg-white pb-6 pt-0 md:pb-8 md:pt-1">
         <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          <div className="text-center mb-16">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-widest mb-4 border border-blue-100">
+          <div className="text-center mb-7 md:mb-8">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-widest mb-3 border border-blue-100">
               Our Success Story
             </span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              The “Why” Behind <span className="text-blue-600">AI Growth Exa</span>
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-1 md:mb-2">
+              The “Why” Behind <span className="text-black-600">AI Growth Exa</span>
             </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-xl transition-all duration-300">
+            <div className="transform-gpu rounded-3xl border border-slate-100 bg-slate-50 p-8 transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl">
               <div className="mb-4 text-red-500">
                 <ShieldCheck size={40} />
               </div>
@@ -144,34 +154,34 @@ const About = () => {
                 <li className="flex gap-2 items-start"><span className="text-red-500 font-bold">•</span> Time on reports without insights</li>
                 <li className="flex gap-2 items-start"><span className="text-red-500 font-bold">•</span> Energy on agencies promising “results” but delivering vanity metrics</li>
               </ul>
-              <p className="mt-4 text-gray-600 font-medium italic">Traditional marketing was loud — but not smart.</p>
+              <p className="mt-4 text-gray-600 font-medium italic">Traditional marketing was loud  but not smart.</p>
             </div>
 
-            <div className="p-8 bg-blue-50 rounded-3xl border border-blue-100 hover:shadow-xl transition-all duration-300 relative">
+            <div className="relative transform-gpu rounded-3xl border border-slate-100 bg-slate-50 p-8 transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl">
               <div className="mb-4 text-blue-600">
                 <Lightbulb size={40} />
               </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">The Turning Point</h3>
-              <p className="text-blue-800 leading-relaxed mb-4">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">The Turning Point</h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
                 We asked one simple question: <strong>What if marketing could think before acting?</strong> That question changed everything.
               </p>
-              <p className="text-blue-800 mb-2">We began experimenting with:</p>
-              <ul className="space-y-2 text-blue-800">
+              <p className="text-gray-600 mb-2">We began experimenting with:</p>
+              <ul className="space-y-2 text-gray-600">
                 <li className="flex gap-2 items-start"><CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" /> Data-driven decision systems</li>
                 <li className="flex gap-2 items-start"><CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" /> Predictive audience behaviour</li>
                 <li className="flex gap-2 items-start"><CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" /> Automation that actually converted</li>
               </ul>
             </div>
 
-            <div className="p-8 bg-indigo-50 rounded-3xl border border-indigo-100 hover:shadow-xl transition-all duration-300 relative">
+            <div className="relative transform-gpu rounded-3xl border border-slate-100 bg-slate-50 p-8 transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl">
               <div className="mb-4 text-indigo-600">
                 <Rocket size={40} />
               </div>
-              <h3 className="text-2xl font-bold text-indigo-900 mb-4">Enterprise-Level Growth</h3>
-              <p className="text-indigo-800 leading-relaxed mb-4">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Enterprise-Level Growth</h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
                 What started as a solution for a few clients quickly became a repeatable growth framework. Today, we don’t just run marketing. <strong>We design growth ecosystems.</strong>
               </p>
-              <ul className="space-y-2 text-indigo-800">
+              <ul className="space-y-2 text-gray-600">
                 <li className="flex gap-2 items-start"><CheckCircle className="w-5 h-5 text-indigo-600 flex-shrink-0" /> Handling complex funnels</li>
                 <li className="flex gap-2 items-start"><CheckCircle className="w-5 h-5 text-indigo-600 flex-shrink-0" /> High-budget performance campaigns</li>
                 <li className="flex gap-2 items-start"><CheckCircle className="w-5 h-5 text-indigo-600 flex-shrink-0" /> AI-powered systems for scaling brands</li>
@@ -182,39 +192,39 @@ const About = () => {
       </section>
 
       {/* Framework Section */}
-      <section className="relative py-20 bg-[#0f172a] text-white overflow-hidden">
+      <section className="relative overflow-hidden bg-[#0f172a] pb-12 pt-8 md:pb-14 md:pt-10 text-white">
         <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
           <FloatingParticles theme="dark" />
         </div>
         <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          <div className="text-center mb-16">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-900/30 text-blue-300 text-xs font-bold uppercase tracking-widest mb-4 border border-blue-800">
+          <div className="text-center mb-5 md:mb-6">
+            <span className="mb-2 inline-flex items-center gap-2 rounded-full border border-blue-800 bg-blue-900/30 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-blue-300">
               How We Work
             </span>
-            <h2 className="text-4xl md:text-5xl font-black mb-4">
-              A Clear, Proven, <span className="text-blue-400">Scalable Growth Framework</span>
+            <h2 className="mb-1 text-4xl font-black md:text-5xl">
+              A Clear, Proven, <span className="text-black-400">Scalable Growth Framework</span>
             </h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+            <p className="mx-auto max-w-2xl text-lg text-slate-400">
               Growth without structure breaks. That’s why we follow a disciplined, system-led process.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-5 gap-4">
+          <div className="grid gap-3 md:grid-cols-5 md:gap-4">
             {[
               { step: '1', title: 'Research & Data', desc: 'We deep-dive into your market, audience behaviour, competitors, and data signals.' },
-              { step: '2', title: 'Strategy', desc: 'Every decision is backed by insights — not assumptions.' },
+              { step: '2', title: 'Strategy', desc: 'Every decision is backed by insights  not assumptions.' },
               { step: '3', title: 'Execution', desc: 'AI-powered ads, funnels, automation, and content go live.' },
               { step: '4', title: 'Optimization', desc: 'Continuous testing, learning, and performance improvement.' },
               { step: '5', title: 'Scaling', desc: 'We double down on what works and build systems for long-term growth.' }
             ].map((item, i) => (
-              <div key={i} className="bg-slate-800 p-6 rounded-2xl border border-slate-700 hover:border-blue-500 transition-all duration-300 group">
-                <div className="text-4xl font-black text-slate-600 mb-4 group-hover:text-blue-500 transition-colors">{item.step}</div>
+              <div key={i} className="group rounded-2xl border border-slate-700 bg-slate-800 p-5 transition-all duration-300 hover:border-blue-500">
+                <div className="mb-3 text-4xl font-black text-slate-600 transition-colors group-hover:text-blue-500">{item.step}</div>
                 <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
                 <p className="text-slate-400 text-sm">{item.desc}</p>
               </div>
             ))}
           </div>
-          <div className="text-center mt-12 bg-blue-900/10 p-4 rounded-xl border border-blue-800 inline-block w-full">
+          <div className="mt-4 inline-block w-full rounded-xl border border-blue-800 bg-blue-900/10 p-3 text-center">
             <p className="text-blue-300 font-semibold flex items-center justify-center gap-2">
               <CheckCircle size={20} /> This is how we turn ideas into measurable results.
             </p>
@@ -224,68 +234,68 @@ const About = () => {
 
 
       {/* Why Choose Us Section */}
-      <section className="relative py-20 bg-white scroll-mt-20">
+      <section className="relative bg-white pb-12 pt-3 md:pb-14 md:pt-4 scroll-mt-20">
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              Why Choose <span className="text-blue-600">AI Growth Exa</span>
+          <div className="text-center mb-6 md:mb-7">
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-1">
+              Why Choose <span className="text-black-600">AI Growth Exa</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto font-medium">
-              Because Growth Needs Focus — Not Fluff.
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
+              Because Growth Needs Focus  Not Fluff.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-4 md:gap-5">
             {[
               { title: 'Performance-Driven Approach', desc: 'Every action is tied directly to ROI and outcomes.', icon: <TrendingUp size={32} />, color: 'bg-green-50 text-green-700 border-green-100' },
               { title: 'Automation-Focused Systems', desc: 'Less manual work. More efficiency and scale.', icon: <Settings size={32} />, color: 'bg-blue-50 text-blue-700 border-blue-100' },
               { title: 'Transparent Reporting', desc: 'Clear numbers. No confusion. No hidden data.', icon: <BarChart size={32} />, color: 'bg-indigo-50 text-indigo-700 border-indigo-100' },
-              { title: 'Dedicated Growth Team', desc: 'Strategists, analysts, and performance experts — aligned to your goals.', icon: <Users size={32} />, color: 'bg-orange-50 text-orange-700 border-orange-100' },
+              { title: 'Dedicated Growth Team', desc: 'Strategists, analysts, and performance experts  aligned to your goals.', icon: <Users size={32} />, color: 'bg-orange-50 text-orange-700 border-orange-100' },
             ].map((item, i) => (
-              <div key={i} className={`p-8 rounded-3xl border ${item.color} hover:shadow-lg transition-all duration-300 flex gap-6 items-start`}>
-                <div className="p-4 bg-white rounded-2xl shadow-sm">{item.icon}</div>
+              <div key={i} className={`rounded-3xl border ${item.color} p-4 hover:shadow-lg transition-all duration-300 flex gap-3 items-start`}>
+                <div className="rounded-2xl bg-white p-3 shadow-sm">{item.icon}</div>
                 <div>
-                  <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
+                  <h3 className="text-xl font-bold mb-1">{item.title}</h3>
                   <p className="opacity-90">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-5">
             <p className="text-2xl font-bold text-gray-900 italic">"We don’t chase trends. We build systems that scale with you."</p>
           </div>
         </div>
       </section>
 
       {/* Mission Vision Values */}
-      <section className="relative py-20 bg-[#1e1b4b] text-white">
+      <section className="relative bg-[#111b2f] py-10 md:py-12 text-white">
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="grid md:grid-cols-3 gap-8 text-center text-white">
-            <div className="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10">
-              <div className="mb-4 text-center flex justify-center text-blue-300">
-                <Target size={48} />
+          <div className="grid gap-4 text-center text-white md:grid-cols-3 md:gap-5">
+            <div className="transform-gpu rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-all duration-300 hover:-translate-y-3 hover:border-blue-300/40 hover:shadow-2xl">
+              <div className="mb-2 flex justify-center text-center text-blue-300">
+                <Target size={38} />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
-              <p className="text-indigo-100">To help brands grow smarter and faster using AI-driven marketing systems that deliver real business impact.</p>
+              <h3 className="mb-2 text-xl font-bold">Our Mission</h3>
+              <p className="text-sm leading-relaxed text-indigo-100">To help brands grow smarter and faster using AI-driven marketing systems that deliver real business impact.</p>
             </div>
-            <div className="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10">
-              <div className="mb-4 text-center flex justify-center text-blue-300">
-                <Globe size={48} />
+            <div className="transform-gpu rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-all duration-300 hover:-translate-y-3 hover:border-blue-300/40 hover:shadow-2xl">
+              <div className="mb-2 flex justify-center text-center text-blue-300">
+                <Globe size={38} />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
-              <p className="text-indigo-100">To become a global growth partner for brands in the AI-first economy — where marketing is intelligent, efficient, and scalable.</p>
+              <h3 className="mb-2 text-xl font-bold">Our Vision</h3>
+              <p className="text-sm leading-relaxed text-indigo-100">To become a global growth partner for brands in the AI-first economy  where marketing is intelligent, efficient, and scalable.</p>
             </div>
-            <div className="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 text-left">
-              <div className="mb-4 text-center flex justify-center text-blue-300">
-                <Lightbulb size={48} />
+            <div className="transform-gpu rounded-3xl border border-white/10 bg-white/5 p-5 text-left backdrop-blur-md transition-all duration-300 hover:-translate-y-3 hover:border-blue-300/40 hover:shadow-2xl">
+              <div className="mb-2 flex justify-center text-center text-blue-300">
+                <Lightbulb size={38} />
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-center">Core Values</h3>
-              <ul className="space-y-3 text-indigo-100">
-                <li className="flex gap-3"><span className="font-bold text-white">Innovation</span> - We evolve with technology</li>
-                <li className="flex gap-3"><span className="font-bold text-white">Data</span> - Decisions backed by truth</li>
-                <li className="flex gap-3"><span className="font-bold text-white">Growth</span> - For our clients and ourselves</li>
-                <li className="flex gap-3"><span className="font-bold text-white">Trust</span> - Long-term partnerships over short wins</li>
+              <h3 className="mb-2 text-center text-xl font-bold">Core Values</h3>
+              <ul className="space-y-1.5 text-sm leading-relaxed text-indigo-100">
+                <li className="flex gap-2"><span className="font-bold text-white">Innovation</span> - We evolve with technology</li>
+                <li className="flex gap-2"><span className="font-bold text-white">Data</span> - Decisions backed by truth</li>
+                <li className="flex gap-2"><span className="font-bold text-white">Growth</span> - For our clients and ourselves</li>
+                <li className="flex gap-2"><span className="font-bold text-white">Trust</span> - Long-term partnerships over short wins</li>
               </ul>
             </div>
           </div>
@@ -293,8 +303,8 @@ const About = () => {
       </section>
 
       {/* Stats Section - Marquee */}
-      <section ref={statsRef} className="relative py-20 bg-white overflow-hidden">
-        <div className="container mx-auto px-6 max-w-7xl text-center mb-12">
+      <section ref={statsRef} className="relative overflow-hidden bg-white pb-3 pt-8 md:pb-4 md:pt-10">
+        <div className="container mx-auto mb-4 max-w-7xl px-6 text-center md:mb-5">
           <h2 className="text-4xl md:text-5xl font-black text-gray-900">Our Growth in Numbers</h2>
         </div>
 
@@ -324,11 +334,11 @@ const About = () => {
                 { value: '151+', label: 'LLM & AI Growth Implementations' },
               ]
             ].map((stat, i) => (
-              <div key={i} className="stat-card mx-4 flex-shrink-0 w-64 p-6 bg-slate-50 rounded-2xl border border-slate-100 text-center hover:scale-105 transition-transform">
-                <div className="text-4xl md:text-5xl font-black mb-2 text-blue-600">
+              <div key={i} className="stat-card mx-1.5 flex-shrink-0 w-48 rounded-2xl border border-white/10 bg-white p-4 text-center transition-transform hover:scale-105 md:mx-2 md:w-52">
+                <div className="mb-1 text-4xl font-black text-blue-600 md:text-[2.85rem]">
                   {stat.value}
                 </div>
-                <div className="text-sm text-gray-600 font-bold uppercase tracking-wide">{stat.label}</div>
+                <div className="text-xs font-bold uppercase tracking-wide text-gray-600 md:text-sm">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -336,38 +346,38 @@ const About = () => {
       </section>
 
       {/* Who We Are & Partners */}
-      <section className="relative py-20 bg-slate-50">
+      <section className="relative bg-slate-50 pb-8 pt-3 md:pb-10 md:pt-4">
         <div className="container mx-auto px-6 max-w-5xl text-center">
-          <h2 className="text-3xl font-bold mb-6">About The Company</h2>
-          <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
-            AI Growth Exa is a growth marketing agency built for the new era of business — where AI, automation, and performance marketing work together.
+          <h2 className="mb-3 text-3xl font-bold">About The Company</h2>
+          <p className="mx-auto mb-6 max-w-3xl text-base text-gray-600">
+            AI Growth Exa is a growth marketing agency built for the new era of business  where AI, automation, and performance marketing work together.
           </p>
 
-          <h3 className="text-2xl font-bold mb-8">We partner with:</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center">
-              <div className="mb-4 text-blue-600">
-                <Rocket size={40} />
+          <h3 className="mb-4 text-2xl font-bold">We partner with:</h3>
+          <div className="grid gap-3 md:grid-cols-3 md:gap-4">
+            <div className="group flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-3.5 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+              <div className="mb-2 text-blue-600 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110">
+                <Rocket size={30} />
               </div>
               <h4 className="font-bold text-lg">Startups</h4>
               <p className="text-gray-500 text-sm">ready to scale</p>
             </div>
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center">
-              <div className="mb-4 text-blue-600">
-                <TrendingUp size={40} />
+            <div className="group flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-3.5 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+              <div className="mb-2 text-blue-600 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-110">
+                <TrendingUp size={30} />
               </div>
               <h4 className="font-bold text-lg">Growing Brands</h4>
               <p className="text-gray-500 text-sm">stuck with inconsistent leads</p>
             </div>
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center">
-              <div className="mb-4 text-blue-600">
-                <Settings size={40} />
+            <div className="group flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-3.5 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+              <div className="mb-2 text-blue-600 transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110">
+                <Settings size={30} />
               </div>
               <h4 className="font-bold text-lg">Mature Businesses</h4>
               <p className="text-gray-500 text-sm">tired of ineffective marketing</p>
             </div>
           </div>
-          <p className="mt-12 text-2xl font-black text-blue-600">
+          <p className="mt-5 text-2xl font-black text-blue-600">
             Our mission is simple: Help brands grow faster, smarter, and sustainably.
           </p>
         </div>
@@ -375,8 +385,8 @@ const About = () => {
 
 
       {/* Testimonials - Marquee */}
-      <section className="relative py-20 bg-white border-t border-gray-100 overflow-hidden">
-        <div className="container mx-auto px-6 max-w-7xl mb-16 text-center">
+      <section className="relative overflow-hidden border-t border-gray-100 bg-white py-12 md:py-14">
+        <div className="container mx-auto mb-8 max-w-7xl px-6 text-center md:mb-10">
           <h2 className="text-4xl font-black text-center">Happy Clients & Testimonials</h2>
         </div>
 
@@ -400,10 +410,10 @@ const About = () => {
                 { name: 'Kuldeep', review: 'Best IT & marketing AGENCY INDIA AI GrowthExa didn’t just improve our ads they fixed our entire growth system. We finally have predictable leads and scalable sales. Their AI-driven approach saved us time, money, and guesswork. LOT OF LOVE AND SUPPORT TO PRIYANSHU SIR.', stars: 5 },
               ]
             ].map((t, i) => (
-              <div key={i} className="mx-4 flex-shrink-0 w-96 bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-lg transition-all duration-300">
+              <div key={i} className="mx-2.5 flex-shrink-0 w-80 rounded-3xl border border-slate-100 bg-slate-50 p-6 transition-all duration-300 hover:shadow-lg md:mx-3 md:w-[21rem]">
                 <div className="flex gap-1 text-yellow-500 mb-4 text-xl">{'★'.repeat(t.stars)}</div>
-                <p className="text-gray-600 italic mb-6 leading-relaxed line-clamp-4">"{t.review}"</p>
-                <div className="font-bold text-gray-900 border-t border-slate-200 pt-4 uppercase text-sm tracking-wide">{t.name}</div>
+                <p className="text-gray-600 italic mb-4 leading-relaxed line-clamp-4">"{t.review}"</p>
+                <div className="font-bold text-gray-900 border-t border-slate-200 pt-3 uppercase text-sm tracking-wide">{t.name}</div>
               </div>
             ))}
           </div>
@@ -431,22 +441,35 @@ const About = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="relative py-20 bg-[#0f172a]">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-black text-white mb-4">Company FAQs</h2>
-            <p className="text-gray-500">Trust-Building & SEO-Focused</p>
+      <section className="relative bg-[#0f172a] py-12 md:py-14">
+        <div className="container mx-auto max-w-6xl px-6">
+          <div className="text-center mb-8 md:mb-9">
+            <h2 className="mb-2 text-4xl font-black text-blue-400">Company FAQs</h2>
+            <p className="text-white-500">Trust-Building & SEO-Focused</p>
           </div>
-          <div className="space-y-4">
-            {[
-              { q: 'When was AI Growth Exa founded?', a: 'We were founded in 2019 with a focus on AI-driven growth marketing.' },
-              { q: 'Are you a traditional marketing agency?', a: 'No. We are a growth-focused, AI-first agency.' },
-              { q: 'Do you work with international clients?', a: 'Yes. We work globally with a remote-first mindset.' },
-              { q: 'What size companies do you work with?', a: 'From growth-stage startups to enterprise-level brands.' },
-            ].map((faq, i) => (
-              <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Q{i + 1}: {faq.q}</h3>
-                <p className="text-gray-600">{faq.a}</p>
+          <div className="columns-1 md:columns-2 md:[column-gap:1.25rem]">
+            {visibleFaqs.map((faq, faqIndex) => (
+              <div key={faqIndex} className="mb-4 break-inside-avoid md:mb-5">
+                <div className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-lg font-bold text-gray-900">Q{faqIndex + 1}: {faq.q}</h3>
+                    <button
+                      type="button"
+                      onClick={() => toggleFaq(faqIndex)}
+                      aria-expanded={Boolean(openFaqs[faqIndex])}
+                      aria-label={openFaqs[faqIndex] ? 'Collapse FAQ' : 'Expand FAQ'}
+                      className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-all duration-300 hover:bg-blue-50 hover:text-blue-600"
+                    >
+                      <ChevronDown
+                        size={20}
+                        className={`transition-transform duration-300 ${openFaqs[faqIndex] ? 'rotate-180' : ''}`}
+                      />
+                    </button>
+                  </div>
+                  {openFaqs[faqIndex] && (
+                    <p className="mt-3 text-gray-600 leading-relaxed">{faq.a}</p>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -454,16 +477,16 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-20 md:py-28 bg-grey-300 text-center overflow-hidden text-white">
+      <section className="relative overflow-hidden bg-grey-300 pb-8 pt-3 text-center text-white md:pb-10 md:pt-4">
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
           <FloatingParticles theme="dark" />
         </div>
 
-        <div className="container mx-auto px-6 max-w-4xl relative z-10">
-          <p className="text-xl md:text-2xl text-blue-600 mb-6 font-medium">Growth isn’t about doing more marketing.<br />It’s about doing the right things — smarter.</p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl text-blue-600 font-black mb-12">Ready to Build Intelligent Growth?</h2>
-          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">Let’s replace guesswork with clarity, systems, and scale.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="container relative z-10 mx-auto -mt-1 max-w-3xl px-6">
+          <p className="text-xl md:text-2xl text-black mb-6 font-medium">Growth isn’t about doing more marketing.<br />It’s about doing the right things  smarter.</p>
+          <h2 className="mx-auto mb-3 max-w-3xl text-3xl font-black leading-tight text-black md:text-5xl lg:text-6xl">Ready to Build Intelligent Growth?</h2>
+          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">Let’s replace guesswork with clarity, systems, and scale.</p>
+          <div className="flex flex-col justify-center gap-2 sm:flex-row">
             <Link
               to="/contact"
               state={{ background: location }}
