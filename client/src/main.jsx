@@ -7,7 +7,9 @@ import './styles/globals.css'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleAuthConfigProvider } from './context/GoogleAuthContext.jsx';
 
-const fallbackApiUrl = 'http://localhost:5011/api';
+const fallbackApiUrl = import.meta.env.PROD
+    ? 'https://ai-growth-exa-1.onrender.com/api'
+    : 'http://localhost:5011/api';
 
 function Root() {
     const envClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';

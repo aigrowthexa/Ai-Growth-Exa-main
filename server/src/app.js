@@ -22,6 +22,7 @@ const defaultAllowedOrigins = [
     "http://localhost:5174",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:5174",
+    "https://ai-growth-exa-main.vercel.app",
 ];
 
 const configuredOrigins = [
