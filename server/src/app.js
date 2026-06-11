@@ -1,7 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const fs = require("fs");
-const path = require("path");
 
 const authRoutes = require("./routes/authRoutes");
 const leadRoutes = require("./routes/leadRoutes");
@@ -78,27 +76,6 @@ app.use("/api/contact", contactRoutes);
 app.get("/api", (req, res) => {
     res.json({ message: "Welcome to Ai Growth Exa API", status: "Running" });
 });
-
-
-if (process.env.NODE_ENV === "production") {
-    const distPath = path.resolve(__dirname, "../../client/dist");
-    const indexFilePath = path.join(distPath, "index.html");
-
-    if (fs.existsSync(indexFilePath)) {
-        app.use(express.static(distPath));
-
-        app.use((req, res, next) => {
-            if (!req.path.startsWith("/api")) {
-                res.sendFile(indexFilePath);
-            } else {
-                next();
-            }
-        });
-    } else {
-        console.warn(`Client dist not found at ${indexFilePath}. Serving API routes only.`);
-    }
-}
-
 
 app.use((req, res) => {
     res.status(404).json({ message: "Route not found" });
