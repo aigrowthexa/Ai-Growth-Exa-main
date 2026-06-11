@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -30,6 +30,28 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
     const [forgotEmail, setForgotEmail] = useState('');
     const [resetData, setResetData] = useState({ email: '', otp: '', newPassword: '', confirmPassword: '' });
     const [notification, setNotification] = useState(null);
+    const [googleButtonWidth, setGoogleButtonWidth] = useState(0);
+    const googleButtonContainerRef = useRef(null);
+
+    useEffect(() => {
+        const updateWidth = () => {
+            const nextWidth = googleButtonContainerRef.current?.offsetWidth || 0;
+            if (nextWidth) {
+                setGoogleButtonWidth(nextWidth);
+            }
+        };
+
+        updateWidth();
+
+        if (typeof ResizeObserver === 'undefined' || !googleButtonContainerRef.current) {
+            return undefined;
+        }
+
+        const observer = new ResizeObserver(updateWidth);
+        observer.observe(googleButtonContainerRef.current);
+
+        return () => observer.disconnect();
+    }, [view, isOpen]);
 
     const showNotification = (message, type = 'success') => {
         setNotification({ message, type });
@@ -617,7 +639,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                 </div>
 
                                 {/* Google Login Button */}
-                                <div className="mb-2 flex justify-center">
+                                <div ref={googleButtonContainerRef} className="mb-2 w-full">
                                     {googleAuthEnabled ? (
                                         <GoogleLogin
                                             onSuccess={handleGoogleSuccess}
@@ -625,6 +647,11 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                                 setError('Google Login Failed');
                                             }}
                                             useOneTap
+                                            theme="outline"
+                                            size="large"
+                                            shape="rectangular"
+                                            text="continue_with"
+                                            width={googleButtonWidth ? String(googleButtonWidth) : undefined}
                                             containerProps={{
                                                 style: { width: '100%' }
                                             }}
