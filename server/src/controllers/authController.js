@@ -92,37 +92,38 @@ exports.register = async (req, res) => {
         const normalizedEmail = email.toLowerCase().trim();
         const existingUser = await User.findOne({ email: normalizedEmail });
 
-        if (existingUser?.isVerified) {
-            return res.status(400).json({ message: "User exists" });
+        if (existingUser?.role === "admin") {
+            return res.status(400).json({ message: "Admin account already exists for this email" });
         }
 
         const otp = generateOTP();
         const otpExpiry = Date.now() + 10 * 60 * 1000;
+        const hashedPassword = await bcrypt.hash(password.toString(), 10);
 
         if (existingUser && !existingUser.isVerified) {
             existingUser.name = name;
-            existingUser.password = await bcrypt.hash(password.toString(), 10);
+            existingUser.password = hashedPassword;
             existingUser.otp = otp;
             existingUser.otpExpiry = otpExpiry;
             await existingUser.save();
-        } else {
-            await PendingRegistration.findOneAndUpdate(
-                { email: normalizedEmail },
-                {
-                    name,
-                    email: normalizedEmail,
-                    password: await bcrypt.hash(password.toString(), 10),
-                    otp,
-                    otpExpiry,
-                    createdAt: new Date(),
-                },
-                {
-                    upsert: true,
-                    new: true,
-                    setDefaultsOnInsert: true,
-                }
-            );
         }
+
+        await PendingRegistration.findOneAndUpdate(
+            { email: normalizedEmail },
+            {
+                name,
+                email: normalizedEmail,
+                password: hashedPassword,
+                otp,
+                otpExpiry,
+                createdAt: new Date(),
+            },
+            {
+                upsert: true,
+                new: true,
+                setDefaultsOnInsert: true,
+            }
+        );
 
         queueRegistrationOtpEmail(normalizedEmail, otp);
         res.json({
@@ -178,10 +179,10 @@ exports.verifyEmail = async (req, res) => {
             return res.status(400).json({ message: "Invalid OTP" });
         }
 
-        const existingVerifiedUser = await User.findOne({ email: normalizedEmail, isVerified: true });
-        if (existingVerifiedUser) {
+        const existingUser = await User.findOne({ email: normalizedEmail });
+        if (existingUser?.role === "admin") {
             await PendingRegistration.deleteOne({ _id: pendingRegistration._id });
-            return res.status(400).json({ message: "User exists" });
+            return res.status(400).json({ message: "Admin account cannot be overwritten" });
         }
 
         await User.findOneAndUpdate(
@@ -190,7 +191,7 @@ exports.verifyEmail = async (req, res) => {
                 name: pendingRegistration.name,
                 email: normalizedEmail,
                 password: pendingRegistration.password,
-                role: "user",
+                role: existingUser?.role || "user",
                 isVerified: true,
                 otp: undefined,
                 otpExpiry: undefined,
