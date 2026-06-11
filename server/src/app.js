@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const fs = require("fs");
 const path = require("path");
 
 const authRoutes = require("./routes/authRoutes");
@@ -81,16 +82,21 @@ app.get("/api", (req, res) => {
 
 if (process.env.NODE_ENV === "production") {
     const distPath = path.resolve(__dirname, "../../client/dist");
+    const indexFilePath = path.join(distPath, "index.html");
 
-    app.use(express.static(distPath));
+    if (fs.existsSync(indexFilePath)) {
+        app.use(express.static(distPath));
 
-    app.use((req, res, next) => {
-        if (!req.path.startsWith("/api")) {
-            res.sendFile(path.join(distPath, "index.html"));
-        } else {
-            next();
-        }
-    });
+        app.use((req, res, next) => {
+            if (!req.path.startsWith("/api")) {
+                res.sendFile(indexFilePath);
+            } else {
+                next();
+            }
+        });
+    } else {
+        console.warn(`Client dist not found at ${indexFilePath}. Serving API routes only.`);
+    }
 }
 
 
