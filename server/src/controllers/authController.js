@@ -69,6 +69,15 @@ const queueRegistrationOtpEmail = (email, otp) => {
     });
 };
 
+const createPendingRegistrationPayload = ({ name, email, password, otp, otpExpiry }) => ({
+    name,
+    email,
+    password,
+    otp,
+    otpExpiry,
+    createdAt: new Date(),
+});
+
 exports.createAdmin = async (req, res) => {
     const exists = await User.findOne({ role: "admin" });
     if (exists) return res.status(400).json({ message: "Admin exists" });
@@ -89,11 +98,22 @@ exports.createAdmin = async (req, res) => {
 exports.register = async (req, res) => {
     try {
         const { name, email, password } = req.body;
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: "Name, email, and password are required" });
+        }
+
         const normalizedEmail = email.toLowerCase().trim();
         const existingUser = await User.findOne({ email: normalizedEmail });
 
         if (existingUser?.role === "admin") {
             return res.status(400).json({ message: "Admin account already exists for this email" });
+        }
+
+        if (existingUser?.isVerified) {
+            return res.status(409).json({
+                message: "User already exists. Please sign in.",
+                requiresLogin: true,
+            });
         }
 
         const otp = generateOTP();
@@ -110,14 +130,13 @@ exports.register = async (req, res) => {
 
         await PendingRegistration.findOneAndUpdate(
             { email: normalizedEmail },
-            {
+            createPendingRegistrationPayload({
                 name,
                 email: normalizedEmail,
                 password: hashedPassword,
                 otp,
                 otpExpiry,
-                createdAt: new Date(),
-            },
+            }),
             {
                 upsert: true,
                 new: true,
@@ -129,6 +148,7 @@ exports.register = async (req, res) => {
         res.json({
             message: "OTP is being sent. Please check your email and continue with verification.",
             email: normalizedEmail,
+            requiresVerification: true,
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -221,8 +241,9 @@ exports.verifyEmail = async (req, res) => {
 
 exports.login = async (req, res) => {
     const { email, password } = req.body;
+    const normalizedEmail = email.toLowerCase().trim();
 
-    const user = await User.findOne({ email: email.toLowerCase().trim() });
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) return res.status(400).json({ message: "Invalid login" });
 
     const isMatch = await bcrypt.compare(
@@ -234,10 +255,33 @@ exports.login = async (req, res) => {
         return res.status(400).json({ message: "Invalid login" });
 
     if (!user.isVerified) {
-        user.isVerified = true;
-        user.otp = undefined;
-        user.otpExpiry = undefined;
+        const otp = generateOTP();
+        user.otp = otp;
+        user.otpExpiry = Date.now() + 10 * 60 * 1000;
         await user.save();
+
+        await PendingRegistration.findOneAndUpdate(
+            { email: normalizedEmail },
+            createPendingRegistrationPayload({
+                name: user.name || "User",
+                email: normalizedEmail,
+                password: user.password,
+                otp,
+                otpExpiry: user.otpExpiry,
+            }),
+            {
+                upsert: true,
+                new: true,
+                setDefaultsOnInsert: true,
+            }
+        );
+
+        queueRegistrationOtpEmail(normalizedEmail, otp);
+        return res.status(403).json({
+            message: "Email not verified. A fresh OTP has been sent to your email.",
+            requiresVerification: true,
+            email: normalizedEmail,
+        });
     }
 
     const token = jwt.sign(

@@ -26,6 +26,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
     // Form states
     const [loginData, setLoginData] = useState({ email: '', password: '' });
     const [registerData, setRegisterData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
+    const [verificationEmail, setVerificationEmail] = useState('');
     const [otp, setOtp] = useState('');
     const [forgotEmail, setForgotEmail] = useState('');
     const [resetData, setResetData] = useState({ email: '', otp: '', newPassword: '', confirmPassword: '' });
@@ -61,6 +62,15 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
     const handleLoginChange = (e) => setLoginData({ ...loginData, [e.target.name]: e.target.value });
     const handleRegisterChange = (e) => setRegisterData({ ...registerData, [e.target.name]: e.target.value });
     const handleResetChange = (e) => setResetData({ ...resetData, [e.target.name]: e.target.value });
+    const openVerificationStep = (email) => {
+        const normalizedEmail = email.trim().toLowerCase();
+        setVerificationEmail(normalizedEmail);
+        setRegisterData((prev) => ({ ...prev, email: normalizedEmail }));
+        setLoginData((prev) => ({ ...prev, email: normalizedEmail }));
+        setOtp('');
+        setView('verify');
+    };
+    const shouldRetryVerification = (message = '') => /already exist/i.test(message);
 
     const handleClose = () => {
         if (onClose) {
@@ -92,6 +102,13 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
             }, 1000);
         } catch (err) {
             const msg = err.response?.data?.message || 'Login failed';
+            if (err.response?.data?.requiresVerification) {
+                openVerificationStep(err.response?.data?.email || loginData.email);
+                setError('');
+                showNotification(msg, 'success');
+                return;
+            }
+
             setError(msg);
             showNotification(`Login Failed: ${msg}`, "error");
         } finally {
@@ -113,18 +130,37 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
         }
 
         try {
-            await api.post('/auth/register', {
+            const response = await api.post('/auth/register', {
                 name: registerData.name,
                 email: registerData.email,
                 password: registerData.password
             });
 
             showNotification("Registration Successful. Check email for OTP.", "success");
-            // On success, switch to verify view
-            setView('verify');
+            openVerificationStep(response.data?.email || registerData.email);
         } catch (err) {
             console.error("Registration Error:", err);
             const msg = err.response?.data?.message || err.message || 'Registration failed. Please try again.';
+
+            if (shouldRetryVerification(msg)) {
+                try {
+                    const resendResponse = await api.post('/auth/resend-verification-otp', {
+                        email: registerData.email,
+                    });
+                    showNotification('Account found. OTP resent to your email.', 'success');
+                    openVerificationStep(resendResponse.data?.email || registerData.email);
+                    setError('');
+                    return;
+                } catch (resendErr) {
+                    const resendMessage =
+                        resendErr.response?.data?.message ||
+                        'Account already exists. Please sign in if your email is already verified.';
+                    setError(resendMessage);
+                    showNotification(`Registration Failed: ${resendMessage}`, 'error');
+                    return;
+                }
+            }
+
             setError(msg);
             showNotification(`Registration Failed: ${msg}`, "error");
         } finally {
@@ -138,11 +174,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
         setError('');
 
         try {
-            // Use email from registerData or loginData depending on flow, 
-            // but for simplicity let's assume registerData has the email if we just registered.
-            // If coming from login 403, we might need to rely on loginData.email.
-            // Let's check which one has a value or use a simplified approach.
-            const emailToVerify = registerData.email || loginData.email;
+            const emailToVerify = verificationEmail || registerData.email || loginData.email;
 
             if (!emailToVerify) {
                 const msg = "Email missing. Please try logging in again.";
@@ -156,12 +188,11 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                 otp
             });
 
-            // Verification successful
-            // Auto-login or ask to login?
-            // Let's switch to login view and pre-fill email
             setView('login');
-            setError(''); // Clear error
-            // Maybe show a success message? 
+            setLoginData((prev) => ({ ...prev, email: emailToVerify, password: '' }));
+            setVerificationEmail('');
+            setOtp('');
+            setError('');
             showNotification('Email verified! Please log in.', 'success');
 
         } catch (err) {
@@ -174,7 +205,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
     };
 
     const handleResendVerificationOtp = async () => {
-        const emailToVerify = registerData.email || loginData.email;
+        const emailToVerify = verificationEmail || registerData.email || loginData.email;
 
         if (!emailToVerify) {
             const msg = 'Email missing. Please register again.';
@@ -403,9 +434,9 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                                 {view === 'forgot-verify' && 'Check your email for the reset code'}
                                 {view === 'reset' && 'Enter your new password'}
                             </p>
-                            {view === 'verify' && registerData.email && (
+                            {view === 'verify' && (verificationEmail || registerData.email) && (
                                 <p className="mt-2 text-xs font-medium text-slate-500">
-                                    OTP sent to <span className="text-slate-900">{registerData.email}</span>
+                                    OTP sent to <span className="text-slate-900">{verificationEmail || registerData.email}</span>
                                 </p>
                             )}
                         </div>
