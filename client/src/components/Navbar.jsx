@@ -6,6 +6,14 @@ import logo from '../assets/images/site/AI_Growth_Exa_logo_designs22-removebg-pr
 import { FaBars, FaTimes } from 'react-icons/fa';
 import AuthModal from './Modals/AuthModal';
 
+const readStoredUser = () => {
+    try {
+        return JSON.parse(localStorage.getItem('user') || 'null');
+    } catch {
+        return null;
+    }
+};
+
 const Navbar = () => {
     const navRef = useRef(null);
     const logoRef = useRef(null);
@@ -24,12 +32,32 @@ const Navbar = () => {
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const [authModalView, setAuthModalView] = useState('login');
     const [openDropdown, setOpenDropdown] = useState(null);
+    const [currentUser, setCurrentUser] = useState(readStoredUser);
 
     const openAuthModal = (view) => {
         setAuthModalView(view);
         setIsAuthModalOpen(true);
         setIsMenuOpen(false);
     };
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setCurrentUser(null);
+        window.dispatchEvent(new Event('storage'));
+        navigate('/');
+    };
+
+    useEffect(() => {
+        const syncUser = () => {
+            setCurrentUser(readStoredUser());
+        };
+
+        window.addEventListener('storage', syncUser);
+        syncUser();
+
+        return () => window.removeEventListener('storage', syncUser);
+    }, []);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -292,13 +320,30 @@ const Navbar = () => {
                         )}
                     </div>
 
-                    <div ref={addToRefs}>
-                        <button
-                            onClick={() => openAuthModal('register')}
-                            className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full text-base font-medium transition-all shadow-lg shadow-blue-500/20"
-                        >
-                            Get Started
-                        </button>
+                    <div ref={addToRefs} className="flex items-center gap-3">
+                        {currentUser ? (
+                            <>
+                                <button
+                                    onClick={() => navigate(currentUser.role === 'admin' ? '/admin' : '/profile')}
+                                    className="px-5 py-2.5 border border-gray-700 hover:border-blue-500 hover:text-blue-400 text-gray-200 rounded-full text-base font-medium transition-all"
+                                >
+                                    {currentUser.role === 'admin' ? 'Dashboard' : 'My Profile'}
+                                </button>
+                                <button
+                                    onClick={handleLogout}
+                                    className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full text-base font-medium transition-all shadow-lg shadow-blue-500/20"
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <button
+                                onClick={() => openAuthModal('register')}
+                                className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full text-base font-medium transition-all shadow-lg shadow-blue-500/20"
+                            >
+                                Get Started
+                            </button>
+                        )}
                     </div>
                 </div>
 
@@ -365,12 +410,35 @@ const Navbar = () => {
                             ))}
 
                             <div className="pt-2 mt-2 border-t border-gray-800">
-                                <button
-                                    onClick={() => openAuthModal('register')}
-                                    className="block w-full text-center px-4 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-base font-medium transition-colors"
-                                >
-                                    Get Started
-                                </button>
+                                {currentUser ? (
+                                    <div className="space-y-2">
+                                        <button
+                                            onClick={() => {
+                                                navigate(currentUser.role === 'admin' ? '/admin' : '/profile');
+                                                setIsMenuOpen(false);
+                                            }}
+                                            className="block w-full text-center px-4 py-3 border border-gray-700 text-gray-200 rounded-lg text-base font-medium transition-colors hover:border-blue-500 hover:text-blue-400"
+                                        >
+                                            {currentUser.role === 'admin' ? 'Dashboard' : 'My Profile'}
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                handleLogout();
+                                                setIsMenuOpen(false);
+                                            }}
+                                            className="block w-full text-center px-4 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-base font-medium transition-colors"
+                                        >
+                                            Logout
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <button
+                                        onClick={() => openAuthModal('register')}
+                                        className="block w-full text-center px-4 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-base font-medium transition-colors"
+                                    >
+                                        Get Started
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>

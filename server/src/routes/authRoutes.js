@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const { protect } = require("../middlewares/authMiddleware");
 
 const {
     createAdmin,
+    getProfile,
     register,
     resendVerificationOtp,
     verifyEmail,
@@ -15,6 +17,7 @@ const {
 } = require("../controllers/authController");
 
 router.get("/google-config", getGoogleAuthConfig);
+router.get("/me", protect, getProfile);
 router.post("/create-admin", createAdmin);
 router.post("/register", register);
 router.post("/resend-verification-otp", resendVerificationOtp);

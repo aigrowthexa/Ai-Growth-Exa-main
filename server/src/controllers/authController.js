@@ -95,6 +95,22 @@ exports.createAdmin = async (req, res) => {
     res.json({ message: "Admin created" });
 };
 
+exports.getProfile = async (req, res) => {
+    if (!req.user) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    return res.json({
+        user: {
+            id: req.user._id,
+            name: req.user.name,
+            email: req.user.email,
+            role: req.user.role,
+            isVerified: req.user.isVerified,
+        },
+    });
+};
+
 exports.register = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -290,7 +306,17 @@ exports.login = async (req, res) => {
         { expiresIn: "1d" }
     );
 
-    res.json({ token, role: user.role });
+    res.json({
+        token,
+        role: user.role,
+        user: {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            isVerified: user.isVerified,
+        },
+    });
 };
 
 exports.forgotPassword = async (req, res) => {

@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Navigate, Routes, Route, useLocation } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import ScrollToTop from '../components/ScrollToTop';
 import ContactModal from '../components/Modals/ContactModal';
@@ -20,6 +20,7 @@ const Awards = lazy(() => import('../pages/Awards'));
 const Founder = lazy(() => import('../pages/Founder'));
 const Casestudies = lazy(() => import('../pages/Casestudies'));
 const Industries = lazy(() => import('../pages/Industries'));
+const ProfilePage = lazy(() => import('../pages/ProfilePage'));
 // const AdminPanel = lazy(() => import('../pages/admin/AdminPanel'));
 
 const AdminLayout = lazy(() => import("../layouts/AdminLayout"));
@@ -34,6 +35,11 @@ const PageLoader = () => (
         <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
     </div>
 );
+
+const ProtectedRoute = ({ children }) => {
+    const token = localStorage.getItem('token');
+    return token ? children : <Navigate to="/login" replace />;
+};
 
 const AppRoutes = () => {
     const location = useLocation();
@@ -75,6 +81,7 @@ const AppRoutes = () => {
                     <Route path="/case-studies" element={<Casestudies />} />
                     <Route path="/case-studies/:studyId" element={<Casestudies />} />
                     <Route path="/industries" element={<Industries />} />
+                    <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/careers" element={<Career />} />
                     <Route path="/cookie-policy" element={<CookieInfo />} />

@@ -80,6 +80,14 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
         }
     };
 
+    const closeAndRedirectAfterLogin = (nextPath) => {
+        if (onClose) {
+            onClose();
+        }
+
+        navigate(nextPath);
+    };
+
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -89,16 +97,14 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
             const res = await api.post('/auth/login', loginData);
 
             localStorage.setItem('token', res.data.token);
-            localStorage.setItem('user', JSON.stringify({ role: res.data.role })); // Simplified user object
+            localStorage.setItem('user', JSON.stringify(res.data.user || { role: res.data.role }));
 
             // Dispatch custom event for Navbar update
             window.dispatchEvent(new Event('storage'));
 
             showNotification("Login Successful!", "success");
             setTimeout(() => {
-                handleClose();
-                // Optional: Reload or redirect
-                // window.location.reload(); 
+                closeAndRedirectAfterLogin(res.data.role === 'admin' ? '/admin' : '/profile');
             }, 1000);
         } catch (err) {
             const msg = err.response?.data?.message || 'Login failed';
@@ -326,8 +332,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
 
             showNotification("Google Login Successful!", "success");
             setTimeout(() => {
-                handleClose();
-                window.location.reload();
+                closeAndRedirectAfterLogin(res.data.role === 'admin' ? '/admin' : '/profile');
             }, 1000);
         } catch (err) {
             console.error('Google Login Error:', err);
