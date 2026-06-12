@@ -530,34 +530,34 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
 
                                     {(view === 'login' || view === 'register') && (
                                         <div className="space-y-1">
-                                        <div className="flex justify-between ml-1">
-                                            <label className="text-xs font-bold uppercase text-slate-500">Password</label>
-                                            {view === 'login' && (
-                                                <button
-                                                    type="button"
-                                                    onClick={() => {
-                                                        setForgotEmail(loginData.email);
-                                                        setError('');
-                                                        setView('forgot');
-                                                    }}
-                                                    className="text-xs text-blue-600 font-semibold hover:text-blue-700"
-                                                >
-                                                    Forgot?
-                                                </button>
-                                            )}
-                                        </div>
-                                        <div className="relative">
-                                            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                                            <input
-                                                type="password"
-                                                name="password"
-                                                value={view === 'login' ? loginData.password : registerData.password}
-                                                onChange={view === 'login' ? handleLoginChange : handleRegisterChange}
-                                                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium text-slate-900 transition-all"
-                                                placeholder="••••••••"
-                                                required
-                                            />
-                                        </div>
+                                            <div className="flex justify-between ml-1">
+                                                <label className="text-xs font-bold uppercase text-slate-500">Password</label>
+                                                {view === 'login' && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            setForgotEmail(loginData.email);
+                                                            setError('');
+                                                            setView('forgot');
+                                                        }}
+                                                        className="text-xs text-blue-600 font-semibold hover:text-blue-700"
+                                                    >
+                                                        Forgot?
+                                                    </button>
+                                                )}
+                                            </div>
+                                            <div className="relative">
+                                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                                <input
+                                                    type="password"
+                                                    name="password"
+                                                    value={view === 'login' ? loginData.password : registerData.password}
+                                                    onChange={view === 'login' ? handleLoginChange : handleRegisterChange}
+                                                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm font-medium text-slate-900 transition-all"
+                                                    placeholder="••••••••"
+                                                    required
+                                                />
+                                            </div>
                                         </div>
                                     )}
                                 </>
