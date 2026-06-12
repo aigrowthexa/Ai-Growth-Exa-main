@@ -30,7 +30,7 @@ MERN Stack application for Ai Growth Exa - AI Based Marketing Agency.
 ## Production Deploy Checklist
 
 ### Vercel frontend
-- Set `VITE_API_URL` to your live backend API, for example `https://ai-growth-exa-1.onrender.com/api`.
+- Set `VITE_API_URL` to your live backend API, for example `https://ai-growth-exa-main-4.onrender.com/api`.
 - Set `VITE_GOOGLE_CLIENT_ID` if Google sign-in should stay enabled in production.
 
 ### Render backend
